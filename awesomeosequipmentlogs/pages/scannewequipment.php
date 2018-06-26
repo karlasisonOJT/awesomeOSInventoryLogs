@@ -18,14 +18,14 @@ if (!isset($_POST["submit"])) {
 				 $param_serialNumber = $serialNumber;
 				   if(mysqli_stmt_execute($stmt)){
 				   		mysqli_stmt_store_result($stmt);
-				   		if(mysqli_stmt_num_rows($stmt) == 1){
+				   		if(mysqli_stmt_num_rows($stmt) == 0){
 				   			mysqli_stmt_close($stmt);
 
-				   			header("location: log_form.php?serialNumber=$serialNumber");
+				   			header("location: enternewequipment.php?serialNumber=$serialNumber");
 
 				   		}
 				   		else{
-				   			die("Item Not Found!".$serialNumber);
+				   			die("Item number ".$serialNumber." already in the database. Please scan another equipment.");
 				   		}
 				   }
 				   else{
@@ -40,10 +40,11 @@ if (!isset($_POST["submit"])) {
 
  ?>
 
+
 <html>
 <body>
-<form  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method = "post" >
-	<label>SCAN ITEM </label>
+<form  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" >
+	<label>SCAN NEW ITEM </label>
 	<input type="text" name="serialNumber" required/><br/>	
 	<input type="submit" name="submit"/>
 </form>
