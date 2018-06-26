@@ -6,7 +6,7 @@ include ('config.php');
 if (isset($_GET["serialNumber"])) {
 	
 //	echo trim($_GET["serialNumber"]);
-	$LTNumber ="";
+	$officeTag ="";
 	$equipmentName ="";
 	$equipmentBrand = "";
 
@@ -20,10 +20,10 @@ if (isset($_GET["serialNumber"])) {
 				 	 if(mysqli_num_rows($result) == 1){
 				 	 	$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 				 	 	$serialNumber =$row["serialNumber"];
-				 	 		$LTNumber = $row["LTNumber"];
+				 	 		$officeTag = $row["officeTag"];
 								$equipmentName = $row["equipmentName"];
 								$equipmentBrand = $row["equipmentBrand"];
-								//echo $LTNumber." ".$equipmentName." ".$equipmentBrand ;
+								//echo $officeTag." ".$equipmentName." ".$equipmentBrand ;
 				     mysqli_stmt_close($stmt);
 				     
 						
@@ -35,7 +35,10 @@ if (isset($_GET["serialNumber"])) {
 				 	 	}
 
 				 	 }
-				 }	
+				 }
+		if (isset($_POST["submit"])) {
+			die("nice ka");
+		}
 
 }
 else{
@@ -45,11 +48,11 @@ else{
 ?>
 <html>
 <body>
-<form name = "log-inForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" >
+<form name = "log-inForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])."?serialNumber=".$serialNumber;?>" method = "post" >
 	<label>Serial Number: </label>
 	<input type="text" name="serialNumber" value="<?php echo $serialNumber; ?>" disabled/><br/>
-	<label>LT Number: </label>
-	<input type="text" name="LTNumber" value="<?php echo $LTNumber; ?>" disabled/><br/>
+	<label>Office Tag: </label>
+	<input type="text" name="officeTag" value="<?php echo $officeTag; ?>" disabled/><br/>
 	<label>Equipment Name: </label>
 	<input type="text" name="equipmentName" value="<?php echo $equipmentName; ?>" disabled/><br/>
 	<label>Brand: </label>

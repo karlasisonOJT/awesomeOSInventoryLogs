@@ -14,4 +14,12 @@ function showHint(str) {
         xmlhttp.send();
         }
         }
+
+function getName(){
+    var uID = document.getElementById("uID").value;
+    var firstName = document.getElementById("fname").value;
+    var lastName = document.getElementById("lname").value;
+    document.getElementById("username").value = firstName.toLowerCase() +lastName.toLowerCase()+uID;
+    document.getElementById("password").value = lastName.toLowerCase()+ firstName.charAt(0).toLowerCase()+uID;
+}
         </script>
