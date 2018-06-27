@@ -1,8 +1,14 @@
 <!DOCTYPE>
 <?php
+session_start();
+include("../Layouts/header.php"); 
 include("../Functions/functions.php"); 
 include("../JS Files/queries.js"); 
 include ('config.php');
+
+if (isset($_SESSION["awesomeOSverifierusername"])) {
+    header("location: scan.php?user=$_SESSION[awesomeOSverifierusername]");
+}
 ?>
 <?php 
 			$verifierID= "1";
@@ -39,66 +45,81 @@ include ('config.php');
 				   		die(mysqli_error($link));
 				   				 }
 			}
+if (!isset($_POST["submit"])) {
+	$verifierusername = $verifierpassword = "";
+	$verifierusername_err = $verifierpassword_err = "";
+}
+elseif (isset($_POST["submit"])) {
+	$verifierusername = $verifierpassword = "";
+	$verifierusername_err = $verifierpassword_err = "";
 
-//echo "string";
+	if(!filter_var(trim($_POST["vUserName"]), FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z0-9-.\s ]+$/")))){
+        $verifierusername_err = 'Invalid username.';
+    } else{
+        $verifierusername = trim($_POST["vUserName"]);
+    }
 
-		/*$vusername = $vpassword = "";
+    if(!filter_var(trim($_POST["vPassword"]), FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z0-9-.\s ]+$/")))){
+        $verifierpassword_err = 'Invalid password.';
+    } else{
+        $verifierpassword = trim($_POST["vPassword"]);
+    }
 
-		if (!isset($_POST["submit"])) {
-		$vusername = $vpassword = "";
-		$vusername_err = $vpassword_err = "";
-					echo "lkjda";
+      if(empty($verifierusername_err) && empty($verifierpassword_err)){
+      	    $sql = "SELECT vUsername, vPassword, vFirstName, vLastName, active FROM verifier WHERE vUsername = ?";
+      	     if($stmt = mysqli_prepare($link, $sql)){
+      	     	 mysqli_stmt_bind_param($stmt, "s", $param_vusername);
+      	     	 $param_vusername = $verifierusername;
+      	     	 if(mysqli_stmt_execute($stmt)){
+      	     	 	mysqli_stmt_store_result($stmt);
+      	     	 	 if(mysqli_stmt_num_rows($stmt) == 1){
+      	     	 	 	mysqli_stmt_bind_result($stmt, $vusername, $hashed_password, $vFirstName, $vLastName, $active);
+                    	if(mysqli_stmt_fetch($stmt)){
+                    		if ($active == 1) {
+                    			
+                    		
+                    		if (strcasecmp(md5($verifierpassword), $hashed_password) ==0) {
+                    			
+                            $_SESSION['awesomeOSverifierusername'] = $verifierusername;
+                            $_SESSION['awesomeOSverifierfirstname'] = $vFirstName;
+                            $_SESSION['awesomeOSverifierlastname'] = $vLastName;
+                            //die($hashed_password." - ". $verifierpassword." - ".$_SESSION['awesomeOSverifierusername'] ."<br/>".$_SESSION['awesomeOSverifierfirstname']." ".$_SESSION['awesomeOSverifierlastname']);
+                                header("location: scan.php?user=$_SESSION[awesomeOSverifierusername]");
+                    		}
+                    		else{
+                    		 $verifierpassword_err = 'Incorrect password.';                 			
+                    		}
+                    		}
+                    		else{
+                    			die("Sorry, you are restricted from logging in.");
+                    		}
 
-		}
-		else{
-						echo "lkjda";
-		$vusername_err = $vpassword_err = "";
-		 $vusername = test_input(trim($_POST["vUserName"]));
-		 $vpassword =   test_input(trim($_POST["vPassword"]));		
-		echo $vusername." ".$vpassword;	 
-		}*/
+                    	}
+      	     	 	 }
+      	     	 	 else{
+      	     	 	 	$verifierusername_err = 'Username not found!';
+      	     	 	 }
+      	     	 }
+      	     }
+      }
+
+
+}
+
  			?>
-<html>
-<body>
-<script>
-/*function submits(){
-//	alert("working");
-	//var message = document.getElementById("warningmessage").innerHTML;
-	//alert(message);
-		var uname = $('#uname').val();
-		var password = $('#password').val();
-		$.post('../Functions/validate_login.php',{postuname:uname,postpassword:password},
-			function(data){
-				$('#result').html(data);
-			});
 
-
-}*/
-function validation(){  
-var name=document.loginForm.vUserName.value;  
-var password=document.loginForm.vPassword.value;  
-  
-if (name==null || name==""){  
-  alert("Name can't be blank");  
-  return false;  
-}else if(password.length<6){  
-  alert("Password must be at least 6 characters long.");  
-  return false;  
-  }  
-}  
-
-/*
-</script>
-<form id = "loginform" name = "loginForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" onsubmit = "return validation()">
+<form id = "loginform" name = "loginForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" >
 	<label>Username: </label>
 	<input type="text" id = "uname" name="vUserName" maxlength="50" onkeyup="showHint(this.value)" required/><br/>
-	<span id="warningmessage"></span><br/>
+		<span id = "username_err"><?php echo $verifierusername_err; ?></span>
+	<span id="warningmessage" onchange = "clearErrors()"></span><br/>
 
 	<label>Password: </label>
-	<input type="password" id = "password" name="vPassword" required/><br/>
-	<input type="submit" name="submit" />
+	<input type="password" id = "password" name="vPassword" required/>
+		<span id = "password_err"><?php echo $verifierpassword_err; ?></span><br/>
+	<input type="submit" name="submit" /><br/>
 </form>
-<div id="result"></div>
-  </body>
 
-  </html>
+<?php
+include("../Layouts/footer.php"); 
+?>

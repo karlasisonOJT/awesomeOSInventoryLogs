@@ -1,7 +1,13 @@
 <!DOCTYPE>
 <?php
+session_start();
+include("../Layouts/header.php"); 
 include("../Functions/functions.php"); 
 include ('config.php');
+
+if (!isset($_SESSION["awesomeOSverifierusername"])|| is_null($_SESSION["awesomeOSverifierusername"])) {
+    header("location: log-in.php");
+}
 ?>
 <?php 
 
@@ -40,13 +46,12 @@ if (!isset($_POST["submit"])) {
 
  ?>
 
-<html>
-<body>
+<a href="logout.php"><button> Log out</button></a>
 <form  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method = "post" >
 	<label>SCAN ITEM </label>
 	<input type="text" name="serialNumber" required/><br/>	
 	<input type="submit" name="submit"/>
 </form>
-  </body>
-
-  </html>
+ <?php
+include("../Layouts/footer.php"); 
+?>
