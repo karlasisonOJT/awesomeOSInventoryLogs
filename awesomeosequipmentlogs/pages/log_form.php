@@ -1,6 +1,12 @@
 <?php
+session_start();
+include("../Layouts/header.php"); 
 include("../Functions/functions.php"); 
 include ('config.php');
+
+if (!isset($_SESSION["awesomeOSverifierusername"])|| is_null($_SESSION["awesomeOSverifierusername"])) {
+    header("location: log-in.php");
+}
 ?>
 <?php
 if (isset($_GET["serialNumber"])) {
@@ -46,8 +52,7 @@ else{
 }
 
 ?>
-<html>
-<body>
+
 <form name = "log-inForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])."?serialNumber=".$serialNumber;?>" method = "post" >
 	<label>Serial Number: </label>
 	<input type="text" name="serialNumber" value="<?php echo $serialNumber; ?>" disabled/><br/>
@@ -95,6 +100,6 @@ else{
 <input type="submit" name="submit"/>
 
 </form>
-  </body>
-
-  </html>
+<?php
+include("../Layouts/footer.php"); 
+?>

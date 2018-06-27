@@ -1,7 +1,16 @@
 <?php 
+session_start();
+include("../Layouts/header.php"); 
 include("../Functions/functions.php"); 
 include("../JS Files/queries.js"); 
 include ('config.php');
+
+if (!isset($_SESSION["awesomeOSverifierusername"])|| is_null($_SESSION["awesomeOSverifierusername"])) {
+    header("location: log-in.php");
+}
+if (strcasecmp($_SESSION["awesomeOSverifierusername"], "admin") != 0) {
+	header("location: log-in.php");
+}
  ?>
 <?php 
 $sql = "SELECT * FROM verifier";
@@ -61,6 +70,6 @@ $sql = "INSERT INTO verifier (vUsername, vPassword, vFirstName, vLastName, activ
 	<input type="submit" name="submit" />
 </form>
 <div id="result"></div>
-  </body>
-
-  </html>
+<?php
+include("../Layouts/footer.php"); 
+?>

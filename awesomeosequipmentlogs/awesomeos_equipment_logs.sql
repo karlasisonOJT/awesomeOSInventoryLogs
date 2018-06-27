@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 26, 2018 at 11:46 PM
+-- Generation Time: Jun 28, 2018 at 01:19 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS `equipment` (
   `officeTag` varchar(100) NOT NULL,
   `equipmentName` varchar(50) NOT NULL,
   `equipmentBrand` varchar(100) NOT NULL,
+  `active` tinyint(1) NOT NULL,
   PRIMARY KEY (`equipmentID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
@@ -39,11 +40,11 @@ CREATE TABLE IF NOT EXISTS `equipment` (
 -- Dumping data for table `equipment`
 --
 
-INSERT INTO `equipment` (`equipmentID`, `serialNumber`, `officeTag`, `equipmentName`, `equipmentBrand`) VALUES
-(1, 'NXMXPSP003543043773400 ', 'adfsg', 'Laptop', 'Acer Aspire E5-473-37XV'),
-(2, 'NXMXQSP011621034593400', 'fsssssssssas', 'Laptop', 'djdsjd'),
-(3, 'NXMXQSP011621034593444', 'lekwRE', 'Laptop', 'lkaedas'),
-(4, '54301727134', 'aa', 'ww', 'ee');
+INSERT INTO `equipment` (`equipmentID`, `serialNumber`, `officeTag`, `equipmentName`, `equipmentBrand`, `active`) VALUES
+(1, 'NXMXPSP003543043773400 ', 'adfsg', 'Laptop', 'Acer Aspire E5-473-37XV', 1),
+(2, 'NXMXQSP011621034593400', 'fsssssssssas', 'Laptop', 'djdsjd', 1),
+(3, 'NXMXQSP011621034593444', 'lekwRE', 'Laptop', 'lkaedas', 1),
+(4, '54301727134', 'aa', 'ww', 'ee', 1);
 
 -- --------------------------------------------------------
 
