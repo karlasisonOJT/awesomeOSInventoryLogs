@@ -1,6 +1,12 @@
 <?php
+session_start();
+include("../Layouts/header.php"); 
 include("../Functions/functions.php"); 
 include ('config.php');
+
+if (!isset($_SESSION["awesomeOSverifierusername"])|| is_null($_SESSION["awesomeOSverifierusername"])) {
+    header("location: log-in.php");
+}
 ?>
 <?php
 if (isset($_GET["serialNumber"])) {
@@ -32,13 +38,15 @@ if (isset($_GET["serialNumber"])) {
 		$officeTag = trim($_POST["officeTag"]);
 		$equipmentName = trim($_POST["equipmentName"]);
 		$equipmentBrand = trim($_POST["equipmentBrand"]);
-		 $sql = "INSERT INTO equipment (serialNumber, officeTag, equipmentName, equipmentBrand) VALUES (?,?,?,?)";
+		$active = "1";
+		 $sql = "INSERT INTO equipment (serialNumber, officeTag, equipmentName, equipmentBrand) VALUES (?,?,?,?,?)";
 		 if($stmt = mysqli_prepare($link, $sql)){
-			mysqli_stmt_bind_param($stmt, "ssss", $param_serialNumber, $param_officeTag, $param_equipmentName, $param_equipmentBrand);
+			mysqli_stmt_bind_param($stmt, "ssssss", $param_serialNumber, $param_officeTag, $param_equipmentName, $param_equipmentBrand,$param_active);
 			$param_serialNumber = $serialNumber;
 			$param_officeTag = $officeTag;
 			$param_equipmentName = $equipmentName;
 			$param_equipmentBrand = $equipmentBrand;
+			$param_active = $active;
 			if(mysqli_stmt_execute($stmt)){
 
 				mysqli_stmt_close($stmt);
@@ -73,6 +81,6 @@ else{
 <input type="submit" name="submit"/>
 
 </form>
-  </body>
-
-  </html>
+<?php
+include("../Layouts/footer.php"); 
+?>

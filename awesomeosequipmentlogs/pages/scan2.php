@@ -8,7 +8,6 @@ include ('config.php');
 if (!isset($_SESSION["awesomeOSverifierusername"])|| is_null($_SESSION["awesomeOSverifierusername"])) {
     header("location: log-in.php");
 }
-
 ?>
 <?php 
 
@@ -25,14 +24,14 @@ if (!isset($_POST["submit"])) {
 				 $param_serialNumber = $serialNumber;
 				   if(mysqli_stmt_execute($stmt)){
 				   		mysqli_stmt_store_result($stmt);
-				   		if(mysqli_stmt_num_rows($stmt) == 0){
+				   		if(mysqli_stmt_num_rows($stmt) == 1){
 				   			mysqli_stmt_close($stmt);
 
-				   			header("location: enternewequipment.php?serialNumber=$serialNumber");
+				   			header("location: log_form.php?serialNumber=$serialNumber");
 
 				   		}
 				   		else{
-				   			die("Item number ".$serialNumber." already in the database. Please scan another equipment.");
+				   			die("Item Not Found!".$serialNumber);
 				   		}
 				   }
 				   else{
@@ -47,15 +46,12 @@ if (!isset($_POST["submit"])) {
 
  ?>
 
-
-<html>
-<body>
-<form  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" >
-	<label>SCAN NEW ITEM </label>
+<a href="logout.php"><button> Log out</button></a>
+<form  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method = "post" >
+	<label>SCAN ITEM </label>
 	<input type="text" name="serialNumber" required/><br/>	
 	<input type="submit" name="submit"/>
 </form>
-
  <?php
 include("../Layouts/footer.php"); 
 ?>
