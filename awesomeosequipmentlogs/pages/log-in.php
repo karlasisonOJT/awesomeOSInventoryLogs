@@ -55,13 +55,21 @@ elseif (isset($_POST["submit"])) {
 
 	if(!filter_var(trim($_POST["vUserName"]), FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z0-9-.\s ]+$/")))){
         $verifierusername_err = 'Invalid username.';
-    } else{
+    } 
+    elseif(empty(trim($_POST["vUserName"]))){
+    	$verifierusername_err = 'Please fill this field';
+    }
+    else{
         $verifierusername = trim($_POST["vUserName"]);
     }
 
     if(!filter_var(trim($_POST["vPassword"]), FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z0-9-.\s ]+$/")))){
         $verifierpassword_err = 'Invalid password.';
-    } else{
+    }
+    elseif(empty(trim($_POST["vPassword"]))){
+    	$verifierpassword_err = 'Please fill this field';
+    }
+    else{
         $verifierpassword = trim($_POST["vPassword"]);
     }
 
@@ -110,7 +118,7 @@ elseif (isset($_POST["submit"])) {
 
 <form id = "loginform" name = "loginForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" >
 	<label>Username: </label>
-	<input type="text" id = "uname" name="vUserName" maxlength="50" onkeyup="showHint(this.value)" required/><br/>
+	<input type="text" id = "uname" name="vUserName" maxlength="50" onkeyup="showHint(this.value)" value = "<?php echo $verifierusername;?>"required/><br/>
 		<span id = "username_err"><?php echo $verifierusername_err; ?></span>
 	<span id="warningmessage" ></span><br/>
 

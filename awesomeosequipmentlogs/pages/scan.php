@@ -11,10 +11,11 @@ if (!isset($_SESSION["awesomeOSverifierusername"])|| is_null($_SESSION["awesomeO
 }
 ?>
 <?php 
+	$vusername = $_SESSION["awesomeOSverifierusername"];
 $logtime = date("g:i A");
 $logdate = date("F j, Y");
 if (isset($_POST["submitwholeform"])) {
-	$vusername = $_SESSION["awesomeOSverifierusername"];
+
 	$bfname = $blastName = $site = $status = $vID = "";
 	$bfname_err = $blastName_err = $site_err = $status_err = "";
 
@@ -42,8 +43,12 @@ if (isset($_POST["submitwholeform"])) {
       	     	 	 	mysqli_stmt_bind_result($stmt, $vID);
       	     	 	 	mysqli_stmt_fetch($stmt);
       	     	 	 	 mysqli_stmt_close($stmt);
-	      	     	 	 	$sql = "SELECT * FROM scanned_equipments ";
+	      	     	 	 	$sql = "SELECT * FROM scanned_equipments  WHERE vUsername = ? ";
 							if($stmt = mysqli_prepare($link, $sql)){
+
+								mysqli_stmt_bind_param($stmt, "s", $param_vuname);
+								$param_vuname = $vusername;
+
 
 								 if(mysqli_stmt_execute($stmt)){
 								 	 $result = mysqli_stmt_get_result($stmt);
@@ -52,7 +57,7 @@ if (isset($_POST["submitwholeform"])) {
 								 	 	$officeTag = $row["officeTag"];
 								 	 	$quantity = $row["quantity"];
 
-								 	 	
+								 	 	mysqli_stmt_close($stmt);
 
 								 	 	$sqlforinsertinglogs = "INSERT INTO equipment_logs (serialNumber, officeTag, borrowerFirstName, borrowerLastName, logdate, logtime, site, quantity, status, verifierID) VALUES (?,?,?,?,?,?,?,?,?,?)";
 								 	 	if ($stmt = mysqli_prepare($link, $sqlforinsertinglogs)) {
@@ -78,7 +83,7 @@ if (isset($_POST["submitwholeform"])) {
 
 								 	 	}
 								 	 }
-								 	 $sqlforemptyingtemptable = "TRUNCATE scanned_equipments";
+								 	 $sqlforemptyingtemptable = "DELETE FROM scanned_equipments WHERE vUsername = '$vusername'";
 													if (!mysqli_query($link, $sqlforemptyingtemptable)) {
 														die("yeah bitch");
 													}
@@ -104,11 +109,13 @@ else{
 
 <a href="logout.php"><button> Log out</button></a>
 <a href="logout.php"><button> Log out</button></a>
-<form  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method = "post"  onsubmit = "enterItems(serialNumber.value, itemQuantity.value);"  >
+
+<form  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method = "post" onsubmit = "enterItems(serialNumber.value, itemQuantity.value, uname.value)"  >
 	<label>SCAN ITEM </label><br/>
 	<input id="scancode" type="text" name="serialNumber" required/><br/>	
 	<label>Quantity:</label><br/>
 	<input type="number" name="itemQuantity" required/><br/>
+	<input type="text" name="uname" value="<?php echo $vusername;?>" hidden />
 	<input type="submit" name="submit" value="Submit" />
 </form>
 
@@ -126,8 +133,11 @@ else{
 				 	 			</tr>
 				 	 	</thead>
 <?php 
-$sql = "SELECT * FROM scanned_equipments ";
+$sql = "SELECT * FROM scanned_equipments WHERE vUsername = ? ";
+
 			if($stmt = mysqli_prepare($link, $sql)){
+				mysqli_stmt_bind_param($stmt, "s", $param_vuname);
+				$param_vuname = $vusername;
 
 				 if(mysqli_stmt_execute($stmt)){
 				 	 $result = mysqli_stmt_get_result($stmt);
@@ -144,6 +154,7 @@ $sql = "SELECT * FROM scanned_equipments ";
 				 	 	
 				 	 	<?php
 				 	 }
+				 	mysqli_stmt_close($stmt);
 				 	 }
 				 }
  ?>

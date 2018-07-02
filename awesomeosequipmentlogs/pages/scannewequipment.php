@@ -13,13 +13,24 @@ if (!isset($_SESSION["awesomeOSverifierusername"])|| is_null($_SESSION["awesomeO
 <?php 
 
 $serialNumber = "";
+$serialNumber_err = "";
 if (!isset($_POST["submit"])) {
 		$serialNumber = "";
+		$serialNumber_err = "";
 		}
 		else{
+			$serialNumber = "";
+			$serialNumber_err = "";
 
-			$serialNumber = test_input($_POST["serialNumber"]);
-			$sql = "SELECT serialNumber FROM equipment WHERE serialNumber = ?";
+			if (empty(trim($_POST["serialNumber"]))) {
+				$serialNumber_err = "Please fill this field";
+			}
+			else{
+				$serialNumber = test_input($_POST["serialNumber"]);
+			}
+
+			if (empty($serialNumber_err)) {
+				$sql = "SELECT serialNumber FROM equipment WHERE serialNumber = ?";
 			if($stmt = mysqli_prepare($link , $sql)){
 				 mysqli_stmt_bind_param($stmt, "s", $param_serialNumber);
 				 $param_serialNumber = $serialNumber;
@@ -32,7 +43,7 @@ if (!isset($_POST["submit"])) {
 
 				   		}
 				   		else{
-				   			die("Item number ".$serialNumber." already in the database. Please scan another equipment.");
+				   			die("Item number ".$serialNumber." already in the database. Please scan another equipment <a href = 'scannewequipment.php'> here </a>." );
 				   		}
 				   }
 				   else{
@@ -43,16 +54,17 @@ if (!isset($_POST["submit"])) {
 				die(mysqli_error($link));
 			}
 
+			}
 		}
 
  ?>
-
 
 <html>
 <body>
 <form  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" >
 	<label>SCAN NEW ITEM </label>
 	<input type="text" name="serialNumber" required/><br/>	
+	<span id = "scan_error"><?php echo $serialNumber_err; ?></span><br/>
 	<input type="submit" name="submit"/>
 </form>
 
