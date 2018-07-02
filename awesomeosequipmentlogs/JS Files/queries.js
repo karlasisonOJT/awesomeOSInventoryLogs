@@ -26,7 +26,11 @@ function getName(){
     document.getElementById("password").value = lastName.toLowerCase()+ firstName.charAt(0).toLowerCase()+uID;
 }
 
-function enterItems(scannedcode, itemquantity) {
+function enterItems(scannedcode, itemquantity, verifier) {
+
+    //alert(verifier+"-" +scannedcode+" "+itemquantity);
+
+
    
        //var scannedcode = document.getElementById("scancode").value;
         if (scannedcode.length == 0) {
@@ -38,19 +42,48 @@ function enterItems(scannedcode, itemquantity) {
         xmlhttp2.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
 
-                //alert(this.responseText);
+                alert(this.responseText);
                 return false;
 
-               // document.getElementById("warningmessage").innerHTML = this.responseText;
+                //document.getElementById("warningmessage").innerHTML = this.responseText;
 
             }
         };
-  xmlhttp2.open("GET", "../Functions/getTable.php?serialcode=" + scannedcode+"&qty=" + itemquantity, true);
+  xmlhttp2.open("GET", "../Functions/getTable.php?serialcode=" + scannedcode+ "&verifier="+ verifier+"&qty=" + itemquantity , true);
         xmlhttp2.send();
         }
         
         }
-       
 
+function item(serialNumber, officeTag, equipmentName, equipmentBrand, quantity){
+    this.serial_number = serialNumber;
+    this.office_tag = officeTag;
+    equipment_name = equipmentName;
+    equipment_brand = equipmentBrand;
+    item_quantity = quantity;
+}
+       
+function changeStatus(ID, activity){
+  
+     var xmlhttp3 = new XMLHttpRequest();
+        xmlhttp3.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+
+                //alert(this.responseText);
+                
+                if (activity ==1) {
+                    document.getElementById(ID).innerHTML = "Activate";
+                }
+                else{
+                    document.getElementById(ID).innerHTML = "Deactivate";
+                }
+
+                //document.getElementById("warningmessage").innerHTML = this.responseText;
+
+            }
+        };
+  xmlhttp3.open("GET", "../Functions/getUser.php?verifieruname=" + ID+"&activity="+activity, true);
+        xmlhttp3.send();
+}
 
         </script>

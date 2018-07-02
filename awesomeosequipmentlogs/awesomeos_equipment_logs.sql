@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 29, 2018 at 02:41 AM
+-- Generation Time: Jul 03, 2018 at 02:51 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `equipment` (
   `equipmentBrand` varchar(100) NOT NULL,
   `active` tinyint(1) NOT NULL,
   PRIMARY KEY (`equipmentID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `equipment`
@@ -44,7 +44,11 @@ INSERT INTO `equipment` (`equipmentID`, `serialNumber`, `officeTag`, `equipmentN
 (1, 'NXMXPSP003543043773400 ', 'adfsg', 'Laptop', 'Acer Aspire E5-473-37XV', 1),
 (2, 'NXMXQSP011621034593400', 'fsssssssssas', 'Laptop', 'djdsjd', 1),
 (3, 'NXMXQSP011621034593444', 'lekwRE', 'Laptop', 'lkaedas', 1),
-(4, '54301727134', 'aa', 'ww', 'ee', 1);
+(4, '54301727134', 'aa', 'ww', 'ee', 1),
+(5, '480010221040', 'ghiepoqee', 'just another paper', 'paper', 1),
+(7, '1031089725', 'ghiepoqee', 'just another paper', 'pastele', 1),
+(9, '480010221049', 'ewrew', 'just another paper', 'paper', 1),
+(10, '480010221048', 'ghiepoqee', 'papel napud', 'papersss', 1);
 
 -- --------------------------------------------------------
 
@@ -65,17 +69,23 @@ CREATE TABLE IF NOT EXISTS `equipment_logs` (
   `status` varchar(10) NOT NULL,
   `verifierID` int(3) NOT NULL,
   PRIMARY KEY (`logNumber`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `equipment_logs`
 --
 
 INSERT INTO `equipment_logs` (`logNumber`, `serialNumber`, `officeTag`, `borrowerFirstName`, `borrowerLastName`, `logdate`, `logtime`, `site`, `quantity`, `status`, `verifierID`) VALUES
-(1, 'NXMXPSP003543043773400 ', 'adfsg', 'sadsa', 'sdfa', 'June 29, 2018', '2:07 AM', 'Landco', 2, '2', 2),
-(2, 'NXMXPSP003543043773400 ', 'adfsg', 'kakaka', 'iiiii', 'June 29, 2018', '2:11 AM', 'MTS 4', 2, '2', 2),
-(3, 'NXMXQSP011621034593444', 'lekwRE', 'kakaka', 'iiiii', 'June 29, 2018', '2:11 AM', 'MTS 4', 3, '2', 2),
-(4, '54301727134', 'aa', 'kakaka', 'iiiii', 'June 29, 2018', '2:11 AM', 'MTS 4', 1, '2', 2);
+(1, 'NXMXPSP003543043773400 ', 'adfsg', 'lilili', 'jsadkajs', 'July 2, 2018', '9:17 PM', 'Landco', 1, '2', 2),
+(2, 'NXMXQSP011621034593400', 'fsssssssssas', 'lilili', 'jsadkajs', 'July 2, 2018', '9:17 PM', 'Landco', 1, '2', 2),
+(3, 'NXMXQSP011621034593400', 'fsssssssssas', 'lilili', 'jsadkajs', 'July 2, 2018', '9:17 PM', 'Landco', 1, '2', 2),
+(4, 'NXMXQSP011621034593400', 'fsssssssssas', 'lilili', 'jsadkajs', 'July 2, 2018', '9:17 PM', 'Landco', 10, '2', 2),
+(5, '54301727134', 'aa', 'tina', 'moran', 'July 2, 2018', '9:20 PM', 'Araullo', 1, '1', 4),
+(6, '54301727134', 'aa', 'tina', 'moran', 'July 2, 2018', '9:20 PM', 'Araullo', 1, '1', 4),
+(7, '54301727134', 'aa', 'tina', 'moran', 'July 2, 2018', '9:21 PM', 'Araullo', 1, '1', 4),
+(8, '54301727134', 'aa', 'tina', 'moran', 'July 2, 2018', '9:21 PM', 'Araullo', 1, '1', 4),
+(9, 'NXMXQSP011621034593400', 'fsssssssssas', 'bob', 'uy', 'July 2, 2018', '9:22 PM', 'Landco', 1, '2', 2),
+(10, 'NXMXQSP011621034593444', 'lekwRE', 'bob', 'uy', 'July 2, 2018', '9:22 PM', 'Landco', 2, '2', 2);
 
 -- --------------------------------------------------------
 
@@ -85,20 +95,14 @@ INSERT INTO `equipment_logs` (`logNumber`, `serialNumber`, `officeTag`, `borrowe
 
 CREATE TABLE IF NOT EXISTS `scanned_equipments` (
   `equipmentID` int(5) NOT NULL AUTO_INCREMENT,
+  `vUsername` varchar(50) NOT NULL,
   `serialNumber` varchar(100) NOT NULL,
   `officeTag` varchar(100) NOT NULL,
   `equipmentName` varchar(50) NOT NULL,
   `equipmentBrand` varchar(100) NOT NULL,
   `quantity` int(5) NOT NULL,
   PRIMARY KEY (`equipmentID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Dumping data for table `scanned_equipments`
---
-
-INSERT INTO `scanned_equipments` (`equipmentID`, `serialNumber`, `officeTag`, `equipmentName`, `equipmentBrand`, `quantity`) VALUES
-(1, 'NXMXPSP003543043773400 ', 'adfsg', 'Laptop', 'Acer Aspire E5-473-37XV', 1);
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
@@ -112,9 +116,9 @@ CREATE TABLE IF NOT EXISTS `verifier` (
   `vPassword` varchar(150) NOT NULL,
   `vFirstName` varchar(50) NOT NULL,
   `vLastName` varchar(50) NOT NULL,
-  `active` tinyint(1) NOT NULL,
+  `active` int(1) NOT NULL,
   PRIMARY KEY (`verifierID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `verifier`
@@ -122,10 +126,10 @@ CREATE TABLE IF NOT EXISTS `verifier` (
 
 INSERT INTO `verifier` (`verifierID`, `vUsername`, `vPassword`, `vFirstName`, `vLastName`, `active`) VALUES
 (1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'AwesomeOS', 'Admin', 1),
-(2, 'karlasison2', 'dba1d50381db809d0b755fab5e3ce89f', 'karla', 'sison', 1),
-(3, 'aprilmayjune3', 'de79e08e9c726e89768f38d139c0523c', 'April', 'Mayjune', 2),
+(2, 'karlasison2', 'dba1d50381db809d0b755fab5e3ce89f', 'Karla', 'Sison', 1),
+(3, 'nicholesison3', '996cf3f594f1219cda3e4524854ea48c', 'Nichole', 'Sison', 2),
 (4, 'camillesanico4', '7948082442a8493a1853c8cd5bb8fe39', 'Camille', 'Sanico', 1),
-(7, 'aljohnbajao5', '60ec5050008b2a01b237bbf1c2914084', 'Aljohn', 'bajao', 1);
+(5, 'aljohnbajao5', '60ec5050008b2a01b237bbf1c2914084', 'Aljohn', 'Bajao', 2);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -9,6 +9,8 @@ if (!isset($_SESSION["awesomeOSverifierusername"])|| is_null($_SESSION["awesomeO
 }
 ?>
 <?php
+$officeTag = $equipmentName = $equipmentBrand = "";
+		$officeTag_err = $equipmentName_err = $equipmentBrand_err = "";
 if (isset($_GET["serialNumber"])) {
 	$serialNumber = trim($_GET["serialNumber"]);
 
@@ -33,15 +35,37 @@ if (isset($_GET["serialNumber"])) {
 				}
 	if (!isset($_POST["submit"])) {
 		$officeTag = $equipmentName = $equipmentBrand = "";
+		$officeTag_err = $equipmentName_err = $equipmentBrand_err = "";
 	}
 	elseif (isset($_POST["submit"])) {
-		$officeTag = trim($_POST["officeTag"]);
-		$equipmentName = trim($_POST["equipmentName"]);
-		$equipmentBrand = trim($_POST["equipmentBrand"]);
-		$active = "1";
-		 $sql = "INSERT INTO equipment (serialNumber, officeTag, equipmentName, equipmentBrand) VALUES (?,?,?,?,?)";
+		$officeTag = $equipmentName = $equipmentBrand = "";
+		$officeTag_err = $equipmentName_err = $equipmentBrand_err = "";
+
+		if (empty(trim($_POST["officeTag"]))) {
+			$officeTag_err = "Please fill this field";
+		}
+		else{
+			$officeTag = trim($_POST["officeTag"]);
+		}
+
+		if (empty(trim($_POST["equipmentName"]))) {
+			$equipmentName_err = "Please fill this field";
+		}
+		else{
+			$equipmentName = trim($_POST["equipmentName"]);
+		}
+		if (empty(trim($_POST["equipmentBrand"]))) {
+			$equipmentBrand_err = "Please fill this field";
+		}
+		else{
+			$equipmentBrand = trim($_POST["equipmentBrand"]);
+		}
+
+if (empty($officeTag_err) && empty($equipmentName_err) && empty($equipmentBrand_err)) {
+	$active = "1";
+		 $sql = "INSERT INTO equipment (serialNumber, officeTag, equipmentName, equipmentBrand, active) VALUES (?,?,?,?,?)";
 		 if($stmt = mysqli_prepare($link, $sql)){
-			mysqli_stmt_bind_param($stmt, "ssssss", $param_serialNumber, $param_officeTag, $param_equipmentName, $param_equipmentBrand,$param_active);
+			mysqli_stmt_bind_param($stmt, "sssss", $param_serialNumber, $param_officeTag, $param_equipmentName, $param_equipmentBrand, $param_active);
 			$param_serialNumber = $serialNumber;
 			$param_officeTag = $officeTag;
 			$param_equipmentName = $equipmentName;
@@ -50,7 +74,7 @@ if (isset($_GET["serialNumber"])) {
 			if(mysqli_stmt_execute($stmt)){
 
 				mysqli_stmt_close($stmt);
-				header("location: log-in.php");
+				header("location: scannewequipment.php");
 			}
 		 else{
 				die(mysqli_error($link));
@@ -60,6 +84,8 @@ if (isset($_GET["serialNumber"])) {
 			die(mysqli_error($link));
 
 		}
+}
+		
 	}
 }
 else{
@@ -73,11 +99,15 @@ else{
 	<label>Serial Number: </label>
 	<input type="text" name="serialNumber" value="<?php echo $serialNumber; ?>" readonly/><br/>
 	<label>Office Tag: </label>
-	<input type="text" name="officeTag" value="" required/><br/>
+	<input type="text" name="officeTag" value="<?php echo $officeTag; ?>" required/><br/>
+	<span id = "scan_error"><?php echo $officeTag_err; ?></span><br/>
 	<label>Equipment Name: </label>
-	<input type="text" name="equipmentName" value="" required/><br/>
+	<input type="text" name="equipmentName" value="<?php echo $equipmentName; ?>" required/><br/>
+	<span id = "scan_error"><?php echo $equipmentName_err; ?></span><br/>
 	<label>Brand: </label>
-	<input type="text" name="equipmentBrand" value="" required/><br/>
+	<input type="text" name="equipmentBrand" value="<?php echo $equipmentBrand; ?>" required/><br/>
+	<span id = "scan_error"><?php echo $equipmentBrand_err; ?></span><br/>
+
 <input type="submit" name="submit"/>
 
 </form>

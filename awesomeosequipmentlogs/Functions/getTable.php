@@ -2,11 +2,13 @@
 include ('../pages/config.php');
 $scode = $_REQUEST["serialcode"];
 $iqty = $_REQUEST["qty"];
+$verifieruname = $_REQUEST["verifier"];
 //$sql1 = "SELECT * FROM equipment WHERE serialNumber = ?";
 
 $officeTag ="";
 	$equipmentName ="";
 	$equipmentBrand = "";
+
 
 			$sql = "SELECT * FROM equipment WHERE serialNumber = ? ";
 			if($stmt = mysqli_prepare($link, $sql)){
@@ -23,12 +25,12 @@ $officeTag ="";
 								$equipmentBrand = $row["equipmentBrand"];
 								//echo $officeTag." ".$equipmentName." ".$equipmentBrand ;
 				     mysqli_stmt_close($stmt);
-				     $sql2 = "INSERT INTO scanned_equipments (serialNumber, officeTag, equipmentName, equipmentBrand, quantity) VALUES ('$serialNumber','$officeTag', '$equipmentName','$equipmentBrand','$iqty')";
+				     $sql2 = "INSERT INTO scanned_equipments (vUsername, serialNumber, officeTag, equipmentName, equipmentBrand, quantity) VALUES ('$verifieruname', '$serialNumber','$officeTag', '$equipmentName','$equipmentBrand','$iqty')";
 						if (mysqli_query($link, $sql2)) {
-							$scode="gago";
+							$scode=$scode;
 						}
 						else{
-							$scode="hahahah";
+							$scode=mysqli_error($link);
 						}
 				     
 						
@@ -42,6 +44,6 @@ $officeTag ="";
 				 	 }
 				 }
 
- echo $scode." ".$iqty;
+ echo $scode." ".$iqty." ". $verifieruname;
 
 ?>
