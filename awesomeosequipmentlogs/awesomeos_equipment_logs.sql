@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 03, 2018 at 02:51 AM
+-- Generation Time: Jul 03, 2018 at 11:50 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `equipment_logs` (
   `status` varchar(10) NOT NULL,
   `verifierID` int(3) NOT NULL,
   PRIMARY KEY (`logNumber`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `equipment_logs`
@@ -85,7 +85,10 @@ INSERT INTO `equipment_logs` (`logNumber`, `serialNumber`, `officeTag`, `borrowe
 (7, '54301727134', 'aa', 'tina', 'moran', 'July 2, 2018', '9:21 PM', 'Araullo', 1, '1', 4),
 (8, '54301727134', 'aa', 'tina', 'moran', 'July 2, 2018', '9:21 PM', 'Araullo', 1, '1', 4),
 (9, 'NXMXQSP011621034593400', 'fsssssssssas', 'bob', 'uy', 'July 2, 2018', '9:22 PM', 'Landco', 1, '2', 2),
-(10, 'NXMXQSP011621034593444', 'lekwRE', 'bob', 'uy', 'July 2, 2018', '9:22 PM', 'Landco', 2, '2', 2);
+(10, 'NXMXQSP011621034593444', 'lekwRE', 'bob', 'uy', 'July 2, 2018', '9:22 PM', 'Landco', 2, '2', 2),
+(11, '480010221040', 'ghiepoqee', 'Jack', 'Cole', 'July 3, 2018', '8:19 PM', 'MTS 4', 2, '1', 1),
+(12, '480010221040', 'ghiepoqee', 'Jack', 'Cole', 'July 3, 2018', '8:19 PM', 'MTS 4', 2, '1', 1),
+(13, 'NXMXQSP011621034593444', 'lekwRE', 'Jack', 'Cole', 'July 3, 2018', '8:19 PM', 'MTS 4', 1, '1', 1);
 
 -- --------------------------------------------------------
 
@@ -102,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `scanned_equipments` (
   `equipmentBrand` varchar(100) NOT NULL,
   `quantity` int(5) NOT NULL,
   PRIMARY KEY (`equipmentID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 -- --------------------------------------------------------
 
@@ -118,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `verifier` (
   `vLastName` varchar(50) NOT NULL,
   `active` int(1) NOT NULL,
   PRIMARY KEY (`verifierID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `verifier`
@@ -126,10 +129,11 @@ CREATE TABLE IF NOT EXISTS `verifier` (
 
 INSERT INTO `verifier` (`verifierID`, `vUsername`, `vPassword`, `vFirstName`, `vLastName`, `active`) VALUES
 (1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'AwesomeOS', 'Admin', 1),
-(2, 'karlasison2', 'dba1d50381db809d0b755fab5e3ce89f', 'Karla', 'Sison', 1),
+(2, 'karlasison2', 'dba1d50381db809d0b755fab5e3ce89f', 'Karla', 'Sison', 2),
 (3, 'nicholesison3', '996cf3f594f1219cda3e4524854ea48c', 'Nichole', 'Sison', 2),
 (4, 'camillesanico4', '7948082442a8493a1853c8cd5bb8fe39', 'Camille', 'Sanico', 1),
-(5, 'aljohnbajao5', '60ec5050008b2a01b237bbf1c2914084', 'Aljohn', 'Bajao', 2);
+(5, 'aljohnbajao5', '60ec5050008b2a01b237bbf1c2914084', 'Aljohn', 'Bajao', 1),
+(6, 'iacamelleperalta6', '7e91e3e30b5e43bbd87eb9ab90d8569c', 'IaCamelle', 'Peralta', 2);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

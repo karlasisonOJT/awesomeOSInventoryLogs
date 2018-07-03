@@ -3,7 +3,7 @@
 session_start();
 include("../Layouts/header.php"); 
 include("../Functions/functions.php"); 
-include("../JS Files/queries.js"); 
+include("../JS Files/logqueries.js"); 
 include ('config.php');
 
 if (isset($_SESSION["awesomeOSverifierusername"])) {
