@@ -57,7 +57,7 @@ if (isset($_POST["submitwholeform"])) {
 								 	 	$officeTag = $row["officeTag"];
 								 	 	$quantity = $row["quantity"];
 
-								 	 	mysqli_stmt_close($stmt);
+								 	 	//mysqli_stmt_close($stmt);
 
 								 	 	$sqlforinsertinglogs = "INSERT INTO equipment_logs (serialNumber, officeTag, borrowerFirstName, borrowerLastName, logdate, logtime, site, quantity, status, verifierID) VALUES (?,?,?,?,?,?,?,?,?,?)";
 								 	 	if ($stmt = mysqli_prepare($link, $sqlforinsertinglogs)) {

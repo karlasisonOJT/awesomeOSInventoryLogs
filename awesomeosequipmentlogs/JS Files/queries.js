@@ -1,23 +1,4 @@
 <script>
-function showHint(str) {
-    if (str.length == 0) { 
-        document.getElementById("warningmessage").innerHTML = "";
-        return;
-    } else {
-        document.getElementById("username_err").innerHTML = "";
-    document.getElementById("password_err").innerHTML = "";
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("warningmessage").innerHTML = this.responseText;
-
-            }
-        };
-  xmlhttp.open("GET", "../Functions/getwarning.php?q=" + str, true);
-        xmlhttp.send();
-        }
-        }
-
 function getName(){
     var uID = document.getElementById("uID").value;
     var firstName = document.getElementById("fname").value;
@@ -73,9 +54,11 @@ function changeStatus(ID, activity){
                 
                 if (activity ==1) {
                     document.getElementById(ID).innerHTML = "Activate";
+                    activity =2;
                 }
                 else{
-                    document.getElementById(ID).innerHTML = "Deactivate";
+                   document.getElementById(ID).innerHTML = "Deactivate";
+                    activity = 1;
                 }
 
                 //document.getElementById("warningmessage").innerHTML = this.responseText;
@@ -85,5 +68,32 @@ function changeStatus(ID, activity){
   xmlhttp3.open("GET", "../Functions/getUser.php?verifieruname=" + ID+"&activity="+activity, true);
         xmlhttp3.send();
 }
-
+function getUser(tosearch) {
+   
+        var xmlhttp4 = new XMLHttpRequest();
+        xmlhttp4.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("message").innerHTML = this.responseText +" matches found.";
+                document.getElementById("allUsers").innerHTML ="";
+               // alert("jjj");
+            }
+        };
+  xmlhttp4.open("GET", "../Functions/getAllUsers.php?usertosearch=" + tosearch, true);
+        xmlhttp4.send();
+        
+        }
+function getequipment(tosearchequipment) {
+   
+        var xmlhttp5 = new XMLHttpRequest();
+        xmlhttp5.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("message").innerHTML = this.responseText +" matches found.";
+                document.getElementById("allequipments").innerHTML ="";
+               // alert("jjj");
+            }
+        };
+  xmlhttp5.open("GET", "../pages/getAllEquipments.php?tosearchequipment=" + tosearchequipment, true);
+        xmlhttp5.send();
+        
+        }
         </script>

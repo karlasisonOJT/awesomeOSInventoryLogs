@@ -2,7 +2,7 @@
 include ('../pages/config.php');
 
 $c=0;
-$sql= "SELECT vUserName FROM verifier";
+$sql= "SELECT vUsername FROM verifier";
 $result = mysqli_query($link, $sql); 
  while($row = mysqli_fetch_assoc($result)){
  	$user[$c] =  $row;
