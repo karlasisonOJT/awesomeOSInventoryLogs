@@ -1,16 +1,23 @@
 <?php 
 session_start();
+if (!isset($_SESSION["awesomeOSverifierusername"])|| is_null($_SESSION["awesomeOSverifierusername"])) {
+   ?>
+<META http-equiv="refresh" content = "0;URL=log-in.php">
+  <?php
+}
+else{
+if (strcasecmp($_SESSION["awesomeOSverifierusername"], "admin") != 0) {
+	?>
+<META http-equiv="refresh" content = "0;URL=log-in.php">
+  <?php
+}
+else{
+
 include("../Layouts/header.php"); 
 include("../Functions/functions.php"); 
-include("../JS Files/queries.js"); 
 include ('config.php');
 
-if (!isset($_SESSION["awesomeOSverifierusername"])|| is_null($_SESSION["awesomeOSverifierusername"])) {
-    header("location: log-in.php");
-}
-if (strcasecmp($_SESSION["awesomeOSverifierusername"], "admin") != 0) {
-	header("location: log-in.php");
-}
+
  ?>
 <?php 
 $vfname = $vlname = $vusername = $vpassword = "";
@@ -120,5 +127,8 @@ $sql = "SELECT * FROM verifier";
 </form>
 <div id="result"></div>
 <?php
+include("../JS Files/queries.js"); 
 include("../Layouts/footer.php"); 
+}
+}
 ?>

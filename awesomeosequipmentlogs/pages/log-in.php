@@ -1,14 +1,18 @@
 <!DOCTYPE>
 <?php
 session_start();
-include("../Layouts/header.php"); 
+if (isset($_SESSION["awesomeOSverifierusername"])) {
+    //header("location: scan.php?user=$_SESSION[awesomeOSverifierusername]");
+  ?>
+<META http-equiv="refresh" content = "0;URL=scan.php">
+  <?php
+}
+else{
+include("../Layouts/loginheader.php"); 
 include("../Functions/functions.php"); 
-include("../JS Files/logqueries.js"); 
 include ('config.php');
 
-if (isset($_SESSION["awesomeOSverifierusername"])) {
-    header("location: scan.php?user=$_SESSION[awesomeOSverifierusername]");
-}
+
 ?>
 <?php 
 			$verifierID= "1";
@@ -74,14 +78,14 @@ elseif (isset($_POST["submit"])) {
     }
 
       if(empty($verifierusername_err) && empty($verifierpassword_err)){
-      	    $sql = "SELECT vUsername, vPassword, vFirstName, vLastName, active FROM verifier WHERE vUsername = ?";
+      	    $sql = "SELECT verifierID, vUsername, vPassword, vFirstName, vLastName, active FROM verifier WHERE vUsername = ?";
       	     if($stmt = mysqli_prepare($link, $sql)){
       	     	 mysqli_stmt_bind_param($stmt, "s", $param_vusername);
       	     	 $param_vusername = $verifierusername;
       	     	 if(mysqli_stmt_execute($stmt)){
       	     	 	mysqli_stmt_store_result($stmt);
       	     	 	 if(mysqli_stmt_num_rows($stmt) == 1){
-      	     	 	 	mysqli_stmt_bind_result($stmt, $vusername, $hashed_password, $vFirstName, $vLastName, $active);
+      	     	 	 	mysqli_stmt_bind_result($stmt, $verifierid, $vusername, $hashed_password, $vFirstName, $vLastName, $active);
                     	if(mysqli_stmt_fetch($stmt)){
                     		if ($active == 1) {
                     			
@@ -91,8 +95,12 @@ elseif (isset($_POST["submit"])) {
                             $_SESSION['awesomeOSverifierusername'] = $verifierusername;
                             $_SESSION['awesomeOSverifierfirstname'] = $vFirstName;
                             $_SESSION['awesomeOSverifierlastname'] = $vLastName;
+                            $_SESSION["awesomeOSverifierID"] = $verifierid;
                             //die($hashed_password." - ". $verifierpassword." - ".$_SESSION['awesomeOSverifierusername'] ."<br/>".$_SESSION['awesomeOSverifierfirstname']." ".$_SESSION['awesomeOSverifierlastname']);
-                                header("location: scan.php?user=$_SESSION[awesomeOSverifierusername]");
+                                //header("location: scan.php?user=$_SESSION[awesomeOSverifierusername]");
+                                                  ?>
+                      <META http-equiv="refresh" content = "0;URL=scan.php">
+                        <?php
                     		}
                     		else{
                     		 $verifierpassword_err = 'Incorrect password.';                 			
@@ -129,5 +137,7 @@ elseif (isset($_POST["submit"])) {
 </form>
 
 <?php
+include("../JS Files/logqueries.js"); 
 include("../Layouts/footer.php"); 
+}
 ?>

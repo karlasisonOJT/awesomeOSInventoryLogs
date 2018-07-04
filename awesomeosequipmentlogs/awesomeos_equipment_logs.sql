@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 03, 2018 at 11:50 PM
+-- Generation Time: Jul 05, 2018 at 02:44 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `scanned_equipments` (
   `equipmentBrand` varchar(100) NOT NULL,
   `quantity` int(5) NOT NULL,
   PRIMARY KEY (`equipmentID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `verifier` (
   `vLastName` varchar(50) NOT NULL,
   `active` int(1) NOT NULL,
   PRIMARY KEY (`verifierID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `verifier`
@@ -129,11 +129,12 @@ CREATE TABLE IF NOT EXISTS `verifier` (
 
 INSERT INTO `verifier` (`verifierID`, `vUsername`, `vPassword`, `vFirstName`, `vLastName`, `active`) VALUES
 (1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'AwesomeOS', 'Admin', 1),
-(2, 'karlasison2', 'dba1d50381db809d0b755fab5e3ce89f', 'Karla', 'Sison', 2),
-(3, 'nicholesison3', '996cf3f594f1219cda3e4524854ea48c', 'Nichole', 'Sison', 2),
-(4, 'camillesanico4', '7948082442a8493a1853c8cd5bb8fe39', 'Camille', 'Sanico', 1),
+(2, 'karlasison2', 'b52de6a0eff290bb85e471e71ec90a0b', 'Karla', 'Sison', 1),
+(3, 'nicholesison3', '996cf3f594f1219cda3e4524854ea48c', 'Nichole', 'Sison', 1),
+(4, 'camillesanico4', '0ca54c9b19517c919299ad68c27c537b', 'Camille', 'Sanico', 1),
 (5, 'aljohnbajao5', '60ec5050008b2a01b237bbf1c2914084', 'Aljohn', 'Bajao', 1),
-(6, 'iacamelleperalta6', '7e91e3e30b5e43bbd87eb9ab90d8569c', 'IaCamelle', 'Peralta', 2);
+(6, 'iacamelleperalta6', 'b1d71b314220a16de05eb5b84ce900c4', 'IaCamelle', 'Peralta', 1),
+(7, 'aracorsiga7', '2d11ac433cc6ee14669e0cac71026a5c', 'Ara', 'Corsiga', 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
