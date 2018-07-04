@@ -1,14 +1,19 @@
 <!DOCTYPE>
 <?php
 session_start();
+if (!isset($_SESSION["awesomeOSverifierusername"])|| is_null($_SESSION["awesomeOSverifierusername"])) {
+   // header("location: log-in.php");
+	?>
+<META http-equiv="refresh" content = "0;URL=log-in.php">
+  <?php
+
+}
+else{
 include("../Layouts/header.php"); 
 include("../Functions/functions.php"); 
 include ('config.php');
-include("../JS Files/queries.js"); 
 
-if (!isset($_SESSION["awesomeOSverifierusername"])|| is_null($_SESSION["awesomeOSverifierusername"])) {
-    header("location: log-in.php");
-}
+
 ?>
 <?php 
 	$vusername = $_SESSION["awesomeOSverifierusername"];
@@ -107,9 +112,6 @@ else{
 
  ?>
 
-<a href="logout.php"><button> Log out</button></a>
-<a href="logout.php"><button> Log out</button></a>
-
 <form  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method = "post" onsubmit = "enterItems(serialNumber.value, itemQuantity.value, uname.value)"  >
 	<label>SCAN ITEM </label><br/>
 	<input id="scancode" type="text" name="serialNumber" required/><br/>	
@@ -203,5 +205,8 @@ $sql = "SELECT * FROM scanned_equipments WHERE vUsername = ? ";
  </div>
  </div>
  <?php
+ include("../JS Files/queries.js"); 
+
 include("../Layouts/footer.php"); 
+}
 ?>

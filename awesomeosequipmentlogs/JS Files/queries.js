@@ -96,4 +96,62 @@ function getequipment(tosearchequipment) {
         xmlhttp5.send();
         
         }
+function getequipmentlog(tosearchequipmentlog) {
+   
+        var xmlhttp6 = new XMLHttpRequest();
+        xmlhttp6.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("message").innerHTML = this.responseText +" matches found.";
+                document.getElementById("allequipmentlogs").innerHTML ="";
+               // alert("jjj");
+            }
+        };
+  xmlhttp6.open("GET", "../pages/getAllEquipmentLogs.php?tosearchequipmentlog=" + tosearchequipmentlog, true);
+        xmlhttp6.send();
+        
+        }
+
+function showchangepassform(userID) {
+    var x = document.getElementById("changepassform");
+    if (x.style.display === "block") {
+        x.style.display = "none";
+    } else {
+        x.style.display = "block";
+    }
+    document.getElementById("uid").value = userID;
+}
+function showpass(){
+    //alert("lol");
+    var pw = document.getElementById("uPassw");
+    if (pw.value != "") {
+    if (pw.type == "text"){
+        pw.type= "password";
+        
+        document.getElementById("show").innerHTML = "Show Password";
+         document.getElementById("uPasswconfirm").type = "password";
+               
+
+    }
+    else{
+         pw.type= "text";
+
+        document.getElementById("show").innerHTML = "Hide Password";
+        document.getElementById("uPasswconfirm").type = "text";
+    }
+    }
+}
+function submitNewPW(upw, uID){
+   // alert(upw + " = "+ uID);
+     var xmlhttp7 = new XMLHttpRequest();
+        xmlhttp7.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                //document.getElementById("message").innerHTML = this.responseText +" matches found.";
+               // document.getElementById("allequipmentlogs").innerHTML ="";
+                alert(this.responseText);
+                return false;
+            }
+        };
+  xmlhttp7.open("GET", "../pages/submitnewpw.php?userID=" + uID + "&newPW=" +upw, true);
+        xmlhttp7.send();
+}
         </script>

@@ -1,13 +1,19 @@
 <!DOCTYPE>
 <?php
 session_start();
+
+if (!isset($_SESSION["awesomeOSverifierusername"])|| is_null($_SESSION["awesomeOSverifierusername"])) {
+   // header("location: log-in.php");
+	?>
+<META http-equiv="refresh" content = "0;URL=log-in.php">
+  <?php
+
+}
+else{
+
 include("../Layouts/header.php"); 
 include("../Functions/functions.php"); 
 include ('config.php');
-
-if (!isset($_SESSION["awesomeOSverifierusername"])|| is_null($_SESSION["awesomeOSverifierusername"])) {
-    header("location: log-in.php");
-}
 
 ?>
 <?php 
@@ -70,4 +76,5 @@ if (!isset($_POST["submit"])) {
 
  <?php
 include("../Layouts/footer.php"); 
+}
 ?>

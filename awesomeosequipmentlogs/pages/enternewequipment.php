@@ -1,12 +1,19 @@
 <?php
 session_start();
+
+if (!isset($_SESSION["awesomeOSverifierusername"])|| is_null($_SESSION["awesomeOSverifierusername"])) {
+   // header("location: log-in.php");
+	?>
+<META http-equiv="refresh" content = "0;URL=log-in.php">
+  <?php
+
+}
+else{
+	
 include("../Layouts/header.php"); 
 include("../Functions/functions.php"); 
 include ('config.php');
 
-if (!isset($_SESSION["awesomeOSverifierusername"])|| is_null($_SESSION["awesomeOSverifierusername"])) {
-    header("location: log-in.php");
-}
 ?>
 <?php
 $officeTag = $equipmentName = $equipmentBrand = "";
@@ -113,4 +120,5 @@ else{
 </form>
 <?php
 include("../Layouts/footer.php"); 
+}
 ?>

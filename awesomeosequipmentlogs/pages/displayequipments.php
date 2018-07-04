@@ -1,12 +1,17 @@
 <?php
 session_start();
+if (!isset($_SESSION["awesomeOSverifierusername"])|| is_null($_SESSION["awesomeOSverifierusername"])) {
+   // header("location: log-in.php");
+	?>
+<META http-equiv="refresh" content = "0;URL=log-in.php">
+  <?php
+
+}
+else{
+
 include("../Layouts/header.php"); 
 include("../Functions/functions.php"); 
-include("../JS Files/queries.js"); 
 
-if (!isset($_SESSION["awesomeOSverifierusername"])|| is_null($_SESSION["awesomeOSverifierusername"])) {
-    header("location: log-in.php");
-}
 ?>
 <div>
  	<form>
@@ -20,5 +25,7 @@ if (!isset($_SESSION["awesomeOSverifierusername"])|| is_null($_SESSION["awesomeO
 	printAllEquipment($sql);
 	?>
 <?php
+include("../JS Files/queries.js"); 
 include("../Layouts/footer.php"); 
+}
 ?>
