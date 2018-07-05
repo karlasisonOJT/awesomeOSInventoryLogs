@@ -7,7 +7,7 @@ function getName(){
     document.getElementById("password").value = lastName.toLowerCase()+ firstName.charAt(0).toLowerCase()+uID;
 }
 
-function enterItems(scannedcode, itemquantity, verifier) {
+function enterItems(scannedcode, itemquantity, verifier, officetag) {
 
     //alert(verifier+"-" +scannedcode+" "+itemquantity);
 
@@ -30,9 +30,10 @@ function enterItems(scannedcode, itemquantity, verifier) {
 
             }
         };
-  xmlhttp2.open("GET", "../Functions/getTable.php?serialcode=" + scannedcode+ "&verifier="+ verifier+"&qty=" + itemquantity , true);
+  xmlhttp2.open("GET", "../Functions/getTable.php?serialcode=" + scannedcode+ "&verifier="+ verifier+"&qty=" + itemquantity +"&offtag=" +officetag, true);
         xmlhttp2.send();
         }
+
         
         }
 
@@ -154,4 +155,22 @@ function submitNewPW(upw, uID){
   xmlhttp7.open("GET", "../pages/submitnewpw.php?userID=" + uID + "&newPW=" +upw, true);
         xmlhttp7.send();
 }
+
+function getOfficeTags(serialNumber){
+    //alert(serialNumber);
+    //document.getElementById("officetag").innerHTML = ;
+   var xmlhttp8 = new XMLHttpRequest();
+        xmlhttp8.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                //document.getElementById("message").innerHTML = this.responseText +" matches found.";
+               document.getElementById("equipofficetag").innerHTML =this.responseText;
+               alert(this.responseText);
+                //alert();
+                //return false;
+            }
+        };
+  xmlhttp8.open("GET", "../pages/getOfficeTag.php?serialNumber=" + serialNumber, true);
+        xmlhttp8.send();
+}
+
         </script>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 05, 2018 at 02:44 AM
+-- Generation Time: Jul 06, 2018 at 12:54 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -34,21 +34,18 @@ CREATE TABLE IF NOT EXISTS `equipment` (
   `equipmentBrand` varchar(100) NOT NULL,
   `active` tinyint(1) NOT NULL,
   PRIMARY KEY (`equipmentID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `equipment`
 --
 
 INSERT INTO `equipment` (`equipmentID`, `serialNumber`, `officeTag`, `equipmentName`, `equipmentBrand`, `active`) VALUES
-(1, 'NXMXPSP003543043773400 ', 'adfsg', 'Laptop', 'Acer Aspire E5-473-37XV', 1),
-(2, 'NXMXQSP011621034593400', 'fsssssssssas', 'Laptop', 'djdsjd', 1),
-(3, 'NXMXQSP011621034593444', 'lekwRE', 'Laptop', 'lkaedas', 1),
-(4, '54301727134', 'aa', 'ww', 'ee', 1),
-(5, '480010221040', 'ghiepoqee', 'just another paper', 'paper', 1),
-(7, '1031089725', 'ghiepoqee', 'just another paper', 'pastele', 1),
-(9, '480010221049', 'ewrew', 'just another paper', 'paper', 1),
-(10, '480010221048', 'ghiepoqee', 'papel napud', 'papersss', 1);
+(1, 'LEN243001', 'PT-18', 'Printer', 'Brother MFC L88CDW', 1),
+(2, 'NXMXQSP011621034593400', 'LT-190000', 'Laptop', 'Acer Aspire E-5473', 1),
+(3, '1537L04148', 'CG- 100', 'Charger', 'Nilobo', 1),
+(4, '480010221040', 'M-4500', 'Mouse', 'Genius 1234', 1),
+(6, 'NXMXQSP011621034593400', 'LT-190001', 'Acer', 'Acer Aspire E-5473', 1);
 
 -- --------------------------------------------------------
 
@@ -62,33 +59,26 @@ CREATE TABLE IF NOT EXISTS `equipment_logs` (
   `officeTag` varchar(100) NOT NULL,
   `borrowerFirstName` varchar(50) NOT NULL,
   `borrowerLastName` varchar(50) NOT NULL,
-  `logdate` varchar(20) NOT NULL,
-  `logtime` varchar(10) NOT NULL,
+  `logdate` date NOT NULL,
+  `logtime` time NOT NULL,
   `site` varchar(150) NOT NULL,
   `quantity` int(5) NOT NULL,
   `status` varchar(10) NOT NULL,
   `verifierID` int(3) NOT NULL,
   PRIMARY KEY (`logNumber`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `equipment_logs`
 --
 
 INSERT INTO `equipment_logs` (`logNumber`, `serialNumber`, `officeTag`, `borrowerFirstName`, `borrowerLastName`, `logdate`, `logtime`, `site`, `quantity`, `status`, `verifierID`) VALUES
-(1, 'NXMXPSP003543043773400 ', 'adfsg', 'lilili', 'jsadkajs', 'July 2, 2018', '9:17 PM', 'Landco', 1, '2', 2),
-(2, 'NXMXQSP011621034593400', 'fsssssssssas', 'lilili', 'jsadkajs', 'July 2, 2018', '9:17 PM', 'Landco', 1, '2', 2),
-(3, 'NXMXQSP011621034593400', 'fsssssssssas', 'lilili', 'jsadkajs', 'July 2, 2018', '9:17 PM', 'Landco', 1, '2', 2),
-(4, 'NXMXQSP011621034593400', 'fsssssssssas', 'lilili', 'jsadkajs', 'July 2, 2018', '9:17 PM', 'Landco', 10, '2', 2),
-(5, '54301727134', 'aa', 'tina', 'moran', 'July 2, 2018', '9:20 PM', 'Araullo', 1, '1', 4),
-(6, '54301727134', 'aa', 'tina', 'moran', 'July 2, 2018', '9:20 PM', 'Araullo', 1, '1', 4),
-(7, '54301727134', 'aa', 'tina', 'moran', 'July 2, 2018', '9:21 PM', 'Araullo', 1, '1', 4),
-(8, '54301727134', 'aa', 'tina', 'moran', 'July 2, 2018', '9:21 PM', 'Araullo', 1, '1', 4),
-(9, 'NXMXQSP011621034593400', 'fsssssssssas', 'bob', 'uy', 'July 2, 2018', '9:22 PM', 'Landco', 1, '2', 2),
-(10, 'NXMXQSP011621034593444', 'lekwRE', 'bob', 'uy', 'July 2, 2018', '9:22 PM', 'Landco', 2, '2', 2),
-(11, '480010221040', 'ghiepoqee', 'Jack', 'Cole', 'July 3, 2018', '8:19 PM', 'MTS 4', 2, '1', 1),
-(12, '480010221040', 'ghiepoqee', 'Jack', 'Cole', 'July 3, 2018', '8:19 PM', 'MTS 4', 2, '1', 1),
-(13, 'NXMXQSP011621034593444', 'lekwRE', 'Jack', 'Cole', 'July 3, 2018', '8:19 PM', 'MTS 4', 1, '1', 1);
+(1, 'LEN243001', 'PT-18', 'Tina', 'Moran', '2018-07-05', '20:14:22', 'Landco', 1, 'Deployed', 1),
+(2, 'NXMXQSP011621034593400', 'LT-190000', 'Gina', 'Cole', '2018-07-05', '20:14:50', 'Tavera 3F', 1, 'Deployed', 1),
+(3, '1537L04148', 'CG- 100', 'Gina', 'Cole', '2018-07-05', '20:19:03', 'Tavera 3F', 1, 'Deployed', 2),
+(4, 'NXMXQSP011621034593400', 'LT-190000', 'Jack', 'Cole', '2018-07-06', '00:18:16', 'Landco', 1, 'Pulled Out', 2),
+(5, '1537L04148', 'CG- 100', 'Jack', 'Cole', '2018-07-06', '00:18:16', 'Landco', 1, 'Pulled Out', 2),
+(6, '480010221040', 'M-4500', 'Bobby', 'Bibobu', '2018-07-06', '00:20:23', 'Landco', 1, 'Deployed', 2);
 
 -- --------------------------------------------------------
 
@@ -105,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `scanned_equipments` (
   `equipmentBrand` varchar(100) NOT NULL,
   `quantity` int(5) NOT NULL,
   PRIMARY KEY (`equipmentID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 -- --------------------------------------------------------
 
