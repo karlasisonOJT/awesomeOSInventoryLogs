@@ -12,7 +12,6 @@ if (!isset($_SESSION["awesomeOSverifierusername"])|| is_null($_SESSION["awesomeO
 else{
 
 include("../Layouts/header.php"); 
-include("../Functions/functions.php"); 
 include ('config.php');
 
 ?>
@@ -32,33 +31,11 @@ if (!isset($_POST["submit"])) {
 				$serialNumber_err = "Please fill this field";
 			}
 			else{
-				$serialNumber = test_input($_POST["serialNumber"]);
+				$serialNumber = trim($_POST["serialNumber"]);
 			}
 
 			if (empty($serialNumber_err)) {
-				$sql = "SELECT serialNumber FROM equipment WHERE serialNumber = ?";
-			if($stmt = mysqli_prepare($link , $sql)){
-				 mysqli_stmt_bind_param($stmt, "s", $param_serialNumber);
-				 $param_serialNumber = $serialNumber;
-				   if(mysqli_stmt_execute($stmt)){
-				   		mysqli_stmt_store_result($stmt);
-				   		if(mysqli_stmt_num_rows($stmt) == 0){
-				   			mysqli_stmt_close($stmt);
-
 				   			header("location: enternewequipment.php?serialNumber=$serialNumber");
-
-				   		}
-				   		else{
-				   			die("Item number ".$serialNumber." already in the database. Please scan another equipment <a href = 'scannewequipment.php'> here </a>." );
-				   		}
-				   }
-				   else{
-				   	die(mysqli_error($link));
-				   }
-			}
-			else{
-				die(mysqli_error($link));
-			}
 
 			}
 		}
@@ -75,6 +52,7 @@ if (!isset($_POST["submit"])) {
 </form>
 
  <?php
+ include("../Functions/functions.php"); 
 include("../Layouts/footer.php"); 
 }
 ?>

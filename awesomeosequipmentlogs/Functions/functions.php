@@ -92,7 +92,6 @@ $num_rows = mysqli_num_rows($result);
 			<th>Name</th>
 			<th>Serial Code</th>
 			<th>Office Tag</th>
-			<Actions>
 		</tr>
 	</thead>
 <?php
@@ -108,6 +107,7 @@ if($stmt = mysqli_prepare($link, $sql)){
 					<td><?php echo $row["equipmentName"];?></td>
 					<td><?php echo $row["serialNumber"];?></td>
 					<td><?php echo $row["officeTag"];?></td>
+					
 					<?php
 			}
 	}
@@ -129,7 +129,12 @@ $num_rows = mysqli_num_rows($result);
 			<th>Name</th>
 			<th>Serial Code</th>
 			<th>Office Tag</th>
-			<Actions>
+			<th>Borrower's Name</th>
+			<th>Date and Time</th>
+			<th>Site</th>
+			<th>Quantity</th>
+			<th>Status</th>
+			<th>Verified By:</th>
 		</tr>
 	</thead>
 <?php
@@ -145,6 +150,12 @@ if($stmt = mysqli_prepare($link, $sql)){
 					<td><?php echo $row["equipmentName"];?></td>
 					<td><?php echo $row["serialNumber"];?></td>
 					<td><?php echo $row["officeTag"];?></td>
+					<td><?php echo $row["borrowerFirstName"]." ". $row["borrowerLastName"];?></td>
+					<td><?php echo $row["logdate"]." - ".$row["logtime"];?></td>
+					<td><?php echo $row["site"]?></td>
+					<td><?php echo $row["quantity"]?></td>
+					<td><?php echo $row["status"]?></td>					
+					<td><?php echo $row["vFirstName"]." ".$row["vLastName"];?></td>
 					<?php
 
 			}

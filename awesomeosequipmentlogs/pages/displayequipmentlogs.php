@@ -21,7 +21,7 @@ include("../Functions/functions.php");
  </div>
  <table id="allequipmentlogs">
 	<?php
-	$sql = "SELECT * FROM equipment_logs LEFT JOIN equipment ON equipment_logs.serialNUmber = equipment.serialNumber";
+	$sql = "SELECT * FROM (equipment LEFT JOIN equipment_logs ON equipment.serialNUmber = equipment_logs.serialNumber) LEFT JOIN verifier ON equipment_logs.verifierID = verifier.verifierID ";
 	printAllEquipmentLogs($sql);
 	?>
 <?php

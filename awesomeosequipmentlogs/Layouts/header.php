@@ -9,8 +9,9 @@
 <body style="width:100%;">		
         <center> 
         <a href="logout.php"><button> Log out</button></a>
+        <a href="scan.php"><button>Create a new log</button></a>
 		<a href="displayequipments.php"><button>Display Equipments</button></a>
-		<a href="displayequipmentlogs.php"><button>Display Equipments</button></a>
+		<a href="displayequipmentlogs.php"><button>Display Equipment Logs</button></a>
 		<?php
 		if (strcasecmp($_SESSION["awesomeOSverifierusername"], "admin") == 0) {
 			?>

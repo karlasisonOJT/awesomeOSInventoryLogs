@@ -13,6 +13,7 @@ include("../Layouts/header.php");
 include("../Functions/functions.php"); 
 
 ?>
+<div> <a href="scannewequipment.php"><button>Scan new equipment</button></a></div>
 <div>
  	<form>
  		<input type="text" id="equipmentsearchbox" name="tosearchequipment" placeholder = "Search Equipment" onkeyup= "getequipment(this.value)" value="">

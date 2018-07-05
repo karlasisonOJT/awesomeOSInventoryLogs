@@ -17,9 +17,13 @@ include ('config.php');
 ?>
 <?php 
 	$vusername = $_SESSION["awesomeOSverifierusername"];
-$logtime = date("g:i A");
-$logdate = date("F j, Y");
+	$curdatetime = time();
+$logtime = date("G:i:s",$curdatetime);
+$logdate = date("Y-m-d");
 if (isset($_POST["submitwholeform"])) {
+$curdatetime = time();
+$logtime = date("G:i:s",$curdatetime);
+$logdate = date("Y-m-d");
 
 	$bfname = $blastName = $site = $status = $vID = "";
 	$bfname_err = $blastName_err = $site_err = $status_err = "";
@@ -112,9 +116,13 @@ else{
 
  ?>
 
-<form  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method = "post" onsubmit = "enterItems(serialNumber.value, itemQuantity.value, uname.value)"  >
+<form  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method = "post" onsubmit = "enterItems(serialNumber.value, itemQuantity.value, uname.value, officetag.value)"  >
 	<label>SCAN ITEM </label><br/>
-	<input id="scancode" type="text" name="serialNumber" required/><br/>	
+	<input id="scancode" type="text" name="serialNumber" onchange="getOfficeTags(this.value)" required/><br/>	
+	<label>Office Tag</label><br/>
+	<select id="equipofficetag" name="officetag">
+      </select>
+      <br/>
 	<label>Quantity:</label><br/>
 	<input type="number" name="itemQuantity" required/><br/>
 	<input type="text" name="uname" value="<?php echo $vusername;?>" hidden />
@@ -144,7 +152,7 @@ $sql = "SELECT * FROM scanned_equipments WHERE vUsername = ? ";
 				 if(mysqli_stmt_execute($stmt)){
 				 	 $result = mysqli_stmt_get_result($stmt);
 				 	 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-				 	 	var_dump($row);
+				 	 	//var_dump($row);
 				 	 	?>
 				 	 	<tr>
 				 	 		<td><?php echo $row["equipmentName"];?></td>
@@ -189,8 +197,8 @@ $sql = "SELECT * FROM scanned_equipments WHERE vUsername = ? ";
 	<label>Status: </label><br/>
 	<select name = "status" required>
 		<option></option>
-		<option value="1">Deployed</option>
-		<option value="2"> Pulled out</option>
+		<option value="Deployed">Deploy</option>
+		<option value="Pulled Out"> Pull out</option>
 	</select><br/>
 	<label>Verified by: </label>
 	<input type="text" name="vusername" value = "<?php echo $_SESSION['awesomeOSverifierusername']; ?>" hidden/><br/>
