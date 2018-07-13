@@ -17,9 +17,13 @@ include ('config.php');
 ?>
 <?php 
 	$vusername = $_SESSION["awesomeOSverifierusername"];
-$logtime = date("g:i A");
-$logdate = date("F j, Y");
+	$curdatetime = time();
+$logtime = date("G:i:s",$curdatetime);
+$logdate = date("Y-m-d");
 if (isset($_POST["submitwholeform"])) {
+$curdatetime = time();
+$logtime = date("G:i:s",$curdatetime);
+$logdate = date("Y-m-d");
 
 	$bfname = $blastName = $site = $status = $vID = "";
 	$bfname_err = $blastName_err = $site_err = $status_err = "";
@@ -111,10 +115,66 @@ else{
 
 
  ?>
+ <style type="text/css">
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
 
-<form  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method = "post" onsubmit = "enterItems(serialNumber.value, itemQuantity.value, uname.value)"  >
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+ </style>
+<div>
+	<button id="myBtn">Reset Scanned Equipments </button>
+
+<!-- The Modal -->
+		<div id="myModal" class="modal">
+
+		  <!-- Modal content -->
+		  <div class="modal-content">
+		    <span class="close"><button >No, back to scanning equipment</button>
+</span>
+		   	<button onclick="emptyTable()">Yes, reset scanned equipment</button>
+
+		  </div>
+
+		</div>
+</div>
+<form  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method = "post" onsubmit = "enterItems(serialNumber.value, itemQuantity.value, uname.value, officetag.value)"  >
 	<label>SCAN ITEM </label><br/>
-	<input id="scancode" type="text" name="serialNumber" required/><br/>	
+	<input id="scancode" type="text" name="serialNumber" onchange="getOfficeTags(this.value)" required/><br/>	
+	<label>Office Tag</label><br/>
+	<select id="equipofficetag" name="officetag" required>
+      </select>
+      <br/>
 	<label>Quantity:</label><br/>
 	<input type="number" name="itemQuantity" required/><br/>
 	<input type="text" name="uname" value="<?php echo $vusername;?>" hidden />
@@ -124,7 +184,7 @@ else{
 <p id="scannedItems"></p>
 <div>
 <div>
-<table>
+<table id="scanned">
 				 	<thead>
 				 	 			<tr>
 				 	 			<th>Equipment Name</th>
@@ -134,6 +194,9 @@ else{
 				 	 			<th>Office Tag</th>				 	 			
 				 	 			</tr>
 				 	 	</thead>
+				 	 	<tbody >
+				 	 		
+				 	 	
 <?php 
 $sql = "SELECT * FROM scanned_equipments WHERE vUsername = ? ";
 
@@ -144,15 +207,34 @@ $sql = "SELECT * FROM scanned_equipments WHERE vUsername = ? ";
 				 if(mysqli_stmt_execute($stmt)){
 				 	 $result = mysqli_stmt_get_result($stmt);
 				 	 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-				 	 	var_dump($row);
+				 	 	//var_dump($row);
 				 	 	?>
-				 	 	<tr>
+				 	 	<tr >
 				 	 		<td><?php echo $row["equipmentName"];?></td>
 				 	 		<td><?php echo $row["equipmentBrand"];?></td>
 				 	 		<td><?php echo $row["quantity"];?></td>
 				 	 		<td><?php echo $row["serialNumber"];?></td>
 				 	 		<td><?php echo $row["officeTag"];?></td>
+				 	 		
+				 	 		<td>
+				 	 		<?php
+				 	 		$offTag =$row["officeTag"];
+				 	 		$sn = $row["serialNumber"];
+				 	 		$dd = $row["equipmentID"];
+				 	 		?>
+				 	 		<button onclick="cancelequipment(this.value)" value = "<?php echo $offTag; ?>">
+				 	 		Cancel
+							</button>
+							
+				 	 		</td>
+				 	 		<td id ="<?php echo $offTag;?>" hidden>
+							<p>Are you sure you want to cancel this equipment?</p><br/>
+							<button onclick="deletethis(this.value, <?php echo $row["equipmentID"];?>)" value="<?php echo $offTag; ?>">Yes</button>
+							<button onclick="canceldelete(this.value)" value="<?php echo $offTag; ?>">No</button>
+							</td>
+
 				 	 	</tr>
+
 				 	 	
 				 	 	<?php
 				 	 }
@@ -160,8 +242,83 @@ $sql = "SELECT * FROM scanned_equipments WHERE vUsername = ? ";
 				 	 }
 				 }
  ?>
+ </tbody>
  </table>
  </div>
+<script type="text/javascript">
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+
+function cancelequipment(officetag){
+	//var sn = document.getElementById(officetag).innerHTML;
+	//alert(officetag);
+	document.getElementById(officetag).style.display = "block";
+}
+function deletethis(offtag, id){
+	//alert("delete " + offtag);
+	 var xmlhttp9 = new XMLHttpRequest();
+        xmlhttp9.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                //document.getElementById("message").innerHTML = this.responseText +" matches found.";
+              // document.getElementById("equipofficetag").innerHTML =this.responseText;
+            	alert(this.responseText);
+            	location.reload();
+                //alert();
+                //return false;
+            }
+        };
+  xmlhttp9.open("GET", "../pages/cancelequipment.php?officeTag=" + offtag, true);
+        xmlhttp9.send();
+       
+}
+
+function canceldelete(ofctag){
+	//alert("do not delete " + ofctag);
+	document.getElementById(ofctag).style.display = "none";
+}
+function emptyTable(){
+	//alert("delete " + offtag);
+	 var xmlhttp9 = new XMLHttpRequest();
+        xmlhttp9.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                //document.getElementById("message").innerHTML = this.responseText +" matches found.";
+              // document.getElementById("equipofficetag").innerHTML =this.responseText;
+            	//alert(this.responseText);
+            	location.reload();
+                //alert();
+                //return false;
+            }
+        };
+  xmlhttp9.open("GET", "../pages/emptyScannedItems.php", true);
+        xmlhttp9.send();
+       
+}
+
+ </script>
 <div>
  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method = "post" >
  	<label>Borrower: </label><br/>
@@ -189,8 +346,8 @@ $sql = "SELECT * FROM scanned_equipments WHERE vUsername = ? ";
 	<label>Status: </label><br/>
 	<select name = "status" required>
 		<option></option>
-		<option value="1">Deployed</option>
-		<option value="2"> Pulled out</option>
+		<option value="Deployed">Deploy</option>
+		<option value="Pulled Out"> Pull out</option>
 	</select><br/>
 	<label>Verified by: </label>
 	<input type="text" name="vusername" value = "<?php echo $_SESSION['awesomeOSverifierusername']; ?>" hidden/><br/>

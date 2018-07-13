@@ -7,11 +7,8 @@ function getName(){
     document.getElementById("password").value = lastName.toLowerCase()+ firstName.charAt(0).toLowerCase()+uID;
 }
 
-function enterItems(scannedcode, itemquantity, verifier) {
-
+function enterItems(scannedcode, itemquantity, verifier, officetag) {
     //alert(verifier+"-" +scannedcode+" "+itemquantity);
-
-
    
        //var scannedcode = document.getElementById("scancode").value;
         if (scannedcode.length == 0) {
@@ -22,17 +19,20 @@ function enterItems(scannedcode, itemquantity, verifier) {
             var xmlhttp2 = new XMLHttpRequest();
         xmlhttp2.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-
-                alert(this.responseText);
-                return false;
+                 location.reload();
+                //alert(this.responseText);
+             //   return false;
 
                 //document.getElementById("warningmessage").innerHTML = this.responseText;
-
+                if(this.responseText != ""){
+                    alert(this.responseText);
+                }
             }
         };
-  xmlhttp2.open("GET", "../Functions/getTable.php?serialcode=" + scannedcode+ "&verifier="+ verifier+"&qty=" + itemquantity , true);
+  xmlhttp2.open("GET", "../Functions/getTable.php?serialcode=" + scannedcode+ "&verifier="+ verifier+"&qty=" + itemquantity +"&offtag=" +officetag, true);
         xmlhttp2.send();
         }
+
         
         }
 
@@ -154,4 +154,28 @@ function submitNewPW(upw, uID){
   xmlhttp7.open("GET", "../pages/submitnewpw.php?userID=" + uID + "&newPW=" +upw, true);
         xmlhttp7.send();
 }
+
+function getOfficeTags(serialNumber){
+    //alert(serialNumber);
+    //document.getElementById("officetag").innerHTML = ;
+   var xmlhttp8 = new XMLHttpRequest();
+        xmlhttp8.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                //document.getElementById("message").innerHTML = this.responseText +" matches found.";
+               document.getElementById("equipofficetag").innerHTML =this.responseText;
+               if(this.responseText == "0"){
+               alert("Serial Number not in the Database!");
+               document.getElementById("scancode").value = "";
+               }
+               else{
+                return true;
+               }
+                //alert();
+                //return false;
+            }
+        };
+  xmlhttp8.open("GET", "../pages/getOfficeTag.php?serialNumber=" + serialNumber, true);
+        xmlhttp8.send();
+}
+
         </script>

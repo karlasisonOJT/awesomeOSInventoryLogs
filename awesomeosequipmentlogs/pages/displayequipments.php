@@ -11,17 +11,32 @@ else{
 
 include("../Layouts/header.php"); 
 include("../Functions/functions.php"); 
-
 ?>
+<?php
+	$tosearch = "";
+	$sql = "SELECT * FROM equipment";
+	if (isset($_POST["search"])) {
+		$q = $_POST["tosearchequipment"];
+	$sql= "SELECT * FROM equipment WHERE equipmentBrand LIKE '%$q%' || equipmentName LIKE '%$q%' || serialNumber LIKE '%$q%' || officeTag LIKE '%$q%'";
+	$tosearch = $q;
+}
+elseif(isset($_POST["reset"])){
+		$tosearch = "";
+	$sql = "SELECT * FROM equipment";
+}
+?>
+<div> <a href="scannewequipment.php"><button>Scan new equipment</button></a></div>
 <div>
- 	<form>
- 		<input type="text" id="equipmentsearchbox" name="tosearchequipment" placeholder = "Search Equipment" onkeyup= "getequipment(this.value)" value="">
- 		<span id="message"></span>
+ 	<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" >
+ 		<input type="text" id="equipmentsearchbox" name="tosearchequipment" placeholder = "Search Equipment" onkeyup= "getequipment(this.value)" value="<?php echo $tosearch;?>" required>
+ 		<input type="submit" name="search" value="Search" >
+ 		<input type="submit" value="Reset Form" name="reset">
  	</form>
  </div>
+  		<span id="message"></span>
  <table id="allequipments">
 	<?php
-	$sql = "SELECT * FROM equipment";
+
 	printAllEquipment($sql);
 	?>
 <?php
