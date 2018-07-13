@@ -6,15 +6,13 @@ $q = $_REQUEST["usertosearch"];
 if ($q != "") {
 	$sql= "SELECT * FROM verifier WHERE vUsername LIKE '%$q%'";
 }
-else{
+elseif(($q = "") || empty($q) || ($q = null)){
 $sql= "SELECT * FROM verifier";
-
 }
 
- 
 ?>
 <table>
 	<?php 
 	$num_rows = printAllUsers($sql);
-	echo " ".$num_rows;
+	echo $num_rows;
 	?>

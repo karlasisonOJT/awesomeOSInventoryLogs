@@ -125,6 +125,8 @@ $sql = "SELECT * FROM verifier";
 
 	<input type="submit" name="submit" />
 </form>
+<a href="scan.php"><button>Cancel</button></a>
+
 <div id="result"></div>
 <?php
 include("../JS Files/queries.js"); 

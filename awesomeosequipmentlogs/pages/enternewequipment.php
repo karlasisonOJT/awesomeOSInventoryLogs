@@ -11,7 +11,6 @@ if (!isset($_SESSION["awesomeOSverifierusername"])|| is_null($_SESSION["awesomeO
 else{
 	
 include("../Layouts/header.php"); 
-include("../Functions/functions.php"); 
 include ('config.php');
 
 ?>
@@ -21,25 +20,7 @@ $officeTag = $equipmentName = $equipmentBrand = "";
 if (isset($_GET["serialNumber"])) {
 	$serialNumber = trim($_GET["serialNumber"]);
 
-				$sql = "SELECT serialNumber FROM equipment WHERE serialNumber = ?";
-				if($stmt = mysqli_prepare($link , $sql)){
-					 mysqli_stmt_bind_param($stmt, "s", $param_serialNumber);
-					 $param_serialNumber = $serialNumber;
-					   if(mysqli_stmt_execute($stmt)){
-					   		mysqli_stmt_store_result($stmt);
-					   		if(mysqli_stmt_num_rows($stmt) >0){
-					   			mysqli_stmt_close($stmt);
-					   			die("Item number ".$serialNumber." already in the database. Please scan another equipment.");
-					   		}
-					   		
-					   }
-					   else{
-					   	die(mysqli_error($link));
-					   }
-				}
-				else{
-					die(mysqli_error($link));
-				}
+				
 	if (!isset($_POST["submit"])) {
 		$officeTag = $equipmentName = $equipmentBrand = "";
 		$officeTag_err = $equipmentName_err = $equipmentBrand_err = "";
@@ -67,6 +48,26 @@ if (isset($_GET["serialNumber"])) {
 		else{
 			$equipmentBrand = trim($_POST["equipmentBrand"]);
 		}
+
+		$sql = "SELECT serialNumber FROM equipment WHERE officeTag = ?";
+				if($stmt = mysqli_prepare($link , $sql)){
+					 mysqli_stmt_bind_param($stmt, "s", $param_officeTag);
+					 $param_officeTag = $officeTag;
+					   if(mysqli_stmt_execute($stmt)){
+					   		mysqli_stmt_store_result($stmt);
+					   		if(mysqli_stmt_num_rows($stmt) >0){
+					   			mysqli_stmt_close($stmt);
+					   			die("Office Tag".$officeTag." already in the database. Please scan another equipment.");
+					   		}
+					   		
+					   }
+					   else{
+					   	die(mysqli_error($link));
+					   }
+				}
+				else{
+					die(mysqli_error($link));
+				}
 
 if (empty($officeTag_err) && empty($equipmentName_err) && empty($equipmentBrand_err)) {
 	$active = "1";
@@ -116,9 +117,12 @@ else{
 	<span id = "scan_error"><?php echo $equipmentBrand_err; ?></span><br/>
 
 <input type="submit" name="submit"/>
-
 </form>
+<a href="scannewequipment.php"><button>Cancel</button></a>
+
 <?php
 include("../Layouts/footer.php"); 
+include("../Functions/functions.php"); 
+
 }
 ?>
