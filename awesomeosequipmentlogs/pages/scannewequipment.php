@@ -48,9 +48,9 @@ if (!isset($_POST["submit"])) {
 	<label>SCAN NEW ITEM </label>
 	<input type="text" name="serialNumber" required/><br/>	
 	<span id = "scan_error"><?php echo $serialNumber_err; ?></span><br/>
-	<input type="submit" name="submit"/>
+	<input type="submit" name="submit" id="submitbtn"/>
 </form>
-<a href="displayequipments.php"><button>Cancel</button></a>
+<a href="displayequipments.php"><button id="cancelbtn">Cancel</button></a>
  <?php
  include("../Functions/functions.php"); 
 include("../Layouts/footer.php"); 

@@ -1,27 +1,38 @@
 <html>
+<link rel="stylesheet" type="text/css" href="../CSS files/awesomeOSStyle.css">
     <head>
          <title>Awesome OS Equipment Logs</title>
          <center>
-         <h1>Awesome OS</h1>
-         <h2>Equipment Logs</h2>
-         </center>
-</head>
-<body style="width:100%;">		
-        <center> 
-        <a href="logout.php"><button> Log out</button></a>
-        <a href="scan.php"><button>Create a new log</button></a>
-		<a href="displayequipments.php"><button>Display Equipments</button></a>
-		<a href="displayequipmentlogs.php"><button>Display Equipment Logs</button></a>
+         <div id="head">
+         <div id="logo_title">
+         <img src="../Images/Awesome OS Logo.png" width= "100%"><br/>
+         <img src="../Images/Equipment Logs.png" width= "100%">
+         </div>
+         <div id="navigation_btns">
+        <a href="logout.php"><button id="navigation"> Log out</button></a>
+        <a href="scan.php"><button id="navigation">Create a new log</button></a>
+		<a href="displayequipments.php"><button id="navigation">Display Equipments</button></a>
+		<a href="displayequipmentlogs.php"><button id="navigation">Display Equipment Logs</button></a>
 		<?php
 		if (strcasecmp($_SESSION["awesomeOSverifierusername"], "admin") == 0) {
 			?>
-			<a href="create_user.php"><button>Create User</button></a>
-			<a href="deactivateuser.php"><button>Display Users</button></a>
+			<a href="create_user.php"><button id="navigation">Create User</button></a>
+			<a href="deactivateuser.php"><button id="navigation">Display Users</button></a>
 		<?php
 		}
 		elseif (strcasecmp($_SESSION["awesomeOSverifierusername"], "admin") != 0) {
 			?>
-						<a href="changepassword.php"><button>Change Password</button></a>
+						<a href="changepassword.php"><button id="navigation">Change Password</button></a>
 						<?php
 		}
 		?>
+		</div>
+        </div>
+        </center>
+</head>
+<hr/>
+<body>
+<center>
+ <div id="wholeBody">
+		
+        
