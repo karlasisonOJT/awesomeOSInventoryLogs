@@ -123,9 +123,9 @@ $sql = "SELECT * FROM verifier";
 	<input type="text" id = "password" name="upassword"  value = "<?php echo $vpassword;?>" readonly/><br/>
 	<span id=""><?php echo $vpassword_err;?></span><br/>
 
-	<input type="submit" name="submit" />
+	<input type="submit" name="submit" id="submitbtn"/>
 </form>
-<a href="scan.php"><button>Cancel</button></a>
+<a href="scan.php"><button id="cancelbtn">Cancel</button></a>
 
 <div id="result"></div>
 <?php

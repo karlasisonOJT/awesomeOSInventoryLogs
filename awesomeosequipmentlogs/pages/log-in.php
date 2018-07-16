@@ -125,15 +125,16 @@ elseif (isset($_POST["submit"])) {
  			?>
 
 <form id = "loginform" name = "loginForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" >
-	<label>Username: </label>
+	<label>Username: </label><br/>
 	<input type="text" id = "uname" name="vUserName" maxlength="50" onkeyup="showHint(this.value)" value = "<?php echo $verifierusername;?>"required/><br/>
 		<span id = "username_err"><?php echo $verifierusername_err; ?></span>
 	<span id="warningmessage" ></span><br/>
 
 	<label>Password: </label>
+  <br/>
 	<input type="password" id = "password" name="vPassword" required/>
 		<span id = "password_err"><?php echo $verifierpassword_err; ?></span><br/>
-	<input type="submit" name="submit" /><br/>
+	<input type="submit" name="submit" id="submitbtn" /><br/>
 </form>
 
 <?php

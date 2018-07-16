@@ -25,7 +25,7 @@ elseif(isset($_POST["reset"])){
 	$sql = "SELECT * FROM equipment";
 }
 ?>
-<div> <a href="scannewequipment.php"><button>Scan new equipment</button></a></div>
+<div> <a href="scannewequipment.php"><button id="navigation">Scan new equipment</button></a></div>
 <div>
  	<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" >
  		<input type="text" id="equipmentsearchbox" name="tosearchequipment" placeholder = "Search Equipment" onkeyup= "getequipment(this.value)" value="<?php echo $tosearch;?>" required>

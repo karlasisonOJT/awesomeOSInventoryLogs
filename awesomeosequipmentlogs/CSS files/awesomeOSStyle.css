@@ -1,0 +1,141 @@
+/*Header*/
+body{
+	background-color: #FFEFD5;
+}
+#head{
+    /*background-color: FF7F50;*/
+    background: linear-gradient(to right, #FF4500, #FF7F50, white, #FF7F50, #FF4500);
+    border-color: black;
+}
+#logo_title{
+	display: inline-block;
+	width: 30%;
+}
+#navigation_btns{
+	margin-top: 3.5%;
+	float: right;
+	margin-right: 1%;
+}
+#navigation{
+	color: white;
+	padding: 10px;
+	background-color: FF6347;
+	border-color: #E9967A;
+}
+#navigation:hover{
+	background-color: FFA07A;
+}
+#navigation:focus{
+	background-color: FF4500;
+}
+/*Header*/
+#footer{	
+	height: 30px;
+}
+#wholeBody{
+	width: 90%;
+	min-height: 100%;
+    height: auto !important;
+    margin-bottom: 0 auto -30px;
+}
+#leftdiv{
+	margin-top: 10px;
+	float: left;
+	width: 30%;
+	min-height: 70%;
+	background-color: #FFDAB9;
+	border-radius: 10%;
+	border-style: solid;
+	border-size: 1px;
+	border-color: #FF6347;
+
+}
+#rightdiv{
+	width: 60%;
+	float: right;
+}
+
+/*#bottomleftrightdiv{
+background-color: white;
+display: inline;
+width: 50%;
+
+}
+#bottomrightrightdiv{
+	background-color: gray;
+float: right;
+	width: 50%
+}*/
+#borrowerform{
+	background-color: #FFE4B5;
+}
+#myBtn{
+	padding: 10px;
+	background-color: FF6347;
+	border-color: E9967A;
+	width: 100%;
+	margin-top: 10%;
+}
+/* Reset button*/
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%; /* Could be more or less, depending on screen size */
+}
+
+.close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+/*submit button*/
+#submitbtn{
+	color: white;
+	padding: 5px;
+	border-radius: 5px;
+	background-color: #FF4500;
+	border-color: E9967A;
+}
+#submitbtn:hover{
+	background-color: #D2691E;
+}
+#submitbtn:focus{
+	background-color: #DEB887;
+}
+
+#cancelbtn{
+	color: white;
+	padding: 5px;
+	border-radius: 5px;
+	background-color: #D2691E;
+	border-color: #E9967A;
+}
+#cancelbtn:hover{
+	background-color: #FF4500;
+}
+#cancelbtn:focus{
+	background-color: #DEB887;
+}
+/* Reset button*/
