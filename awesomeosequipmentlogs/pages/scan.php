@@ -114,7 +114,19 @@ else{
 
  ?>
  <div id="leftdiv">
-<div>
+<form  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method = "post" onsubmit = "enterItems(serialNumber.value, itemQuantity.value, uname.value, officetag.value)"  >
+	<label> </label><br/>
+	<input id="scancode" type="text" name="serialNumber" onchange="getOfficeTags(this.value)" placeholder="SCAN ITEM HERE" required/><br/>	
+	<label>Office Tag</label><br/>
+	<select id="equipofficetag" name="officetag" required>
+      </select>
+      <br/>
+	<label>Quantity:</label><br/>
+	<input id="eqty" type="number"  name="itemQuantity" required/><br/>
+	<input type="text" name="uname" value="<?php echo $vusername;?>" hidden />
+	<input type="submit" name="submit" value="Submit" id="submitbtn" />
+</form>
+
 	<button id="myBtn">Reset Scanned Equipments </button>
 
 <!-- The Modal -->
@@ -122,29 +134,17 @@ else{
 
 		  <!-- Modal content -->
 		  <div class="modal-content">
-		    <span class="close"><button >No, back to scanning equipment</button>
+		    <span class="close"><button id="negativebtn" >No, back to scanning equipment</button>
 </span>
-		   	<button onclick="emptyTable()">Yes, reset scanned equipment</button>
+		   	<button id="positivebtn" onclick="emptyTable()">Yes, reset scanned equipment</button>
 
 		  </div>
 
 		</div>
-</div>
-<form  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method = "post" onsubmit = "enterItems(serialNumber.value, itemQuantity.value, uname.value, officetag.value)"  >
-	<label>SCAN ITEM </label><br/>
-	<input id="scancode" type="text" name="serialNumber" onchange="getOfficeTags(this.value)" required/><br/>	
-	<label>Office Tag</label><br/>
-	<select id="equipofficetag" name="officetag" required>
-      </select>
-      <br/>
-	<label>Quantity:</label><br/>
-	<input type="number" name="itemQuantity" required/><br/>
-	<input type="text" name="uname" value="<?php echo $vusername;?>" hidden />
-	<input type="submit" name="submit" value="Submit" id="submitbtn" />
-</form>
+
 </div>
 <div id="rightdiv">
-<div>
+<div id="scannedtable">
 <h3 id="scannedItems">Scanned Items</h3>
 <table id="scanned">
 				 	<thead>
@@ -153,7 +153,8 @@ else{
 				 	 			<th>Equipment Brand</th>
 				 	 			<th>Quantity</th>
 				 	 			<th>Serial Number</th>
-				 	 			<th>Office Tag</th>				 	 			
+				 	 			<th>Office Tag</th>
+				 	 			<th>Actions</th>				 	 			
 				 	 			</tr>
 				 	 	</thead>
 				 	 	<tbody >
@@ -187,13 +188,13 @@ $sql = "SELECT * FROM scanned_equipments WHERE vUsername = ? ";
 				 	 		<button  id="cancelbtn" onclick="cancelequipment(this.value)" value = "<?php echo $offTag; ?>">
 				 	 		Cancel
 							</button>
-							
-				 	 		</td>
-				 	 		<td id ="<?php echo $offTag;?>" hidden>
+							<div id ="<?php echo $offTag;?>" hidden>
 							<p>Are you sure you want to cancel this equipment?</p><br/>
-							<button onclick="deletethis(this.value, <?php echo $row["equipmentID"];?>)" value="<?php echo $offTag; ?>">Yes</button>
-							<button onclick="canceldelete(this.value)" value="<?php echo $offTag; ?>">No</button>
-							</td>
+							<button id="positivebtn" onclick="deletethis(this.value, <?php echo $row["equipmentID"];?>)" value="<?php echo $offTag; ?>">Yes</button>
+							<button id="negativebtn" onclick="canceldelete(this.value)" value="<?php echo $offTag; ?>">No</button>
+							</div >
+				 	 		</td>
+				 	 		
 
 				 	 	</tr>
 
@@ -210,13 +211,13 @@ $sql = "SELECT * FROM scanned_equipments WHERE vUsername = ? ";
 <div id="borrowerform">
 
  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method = "post" >
- 	<label>Borrower: </label><br/>
-	<input type="text" name="bfirstName" placeholder = "Borrower's First Name" required/><br/>
-	<span><?php echo $bfname_err; ?></span><br/>
+ 	<label>Borrower: </label>
+	<input type="text" name="bfirstName" placeholder = "Borrower's First Name" required/>
 	<input type="text" name="blastName" placeholder = "Borrower's Last Name" required/><br/>
+	<span><?php echo $bfname_err; ?></span>
 	<span><?php echo $blastName_err; ?></span>
 	<br/>
-	<label>Site: </label><br/>
+	<label>Site: </label>
 	<select name="site" required>
 		<option></option>
 		<option value="Araullo"> Araullo </option>
@@ -229,17 +230,17 @@ $sql = "SELECT * FROM scanned_equipments WHERE vUsername = ? ";
 		<option value="MTS 5"> MTS 5 </option>
 		<option value="MTS 4"> MTS 4 </option>
 	</select>
-	<br/>
-	<label>Status: </label><br/>
+
+	<label>Status: </label>
 	<select name = "status" required>
 		<option></option>
 		<option value="Deployed">Deploy</option>
 		<option value="Pulled Out"> Pull out</option>
-	</select><br/>
-	<label>Verified by: </label>
-	<input type="text" name="vusername" value = "<?php echo $_SESSION['awesomeOSverifierusername']; ?>" hidden/><br/>
-	<input type="text" name="vfirstName" value = "<?php echo $_SESSION['awesomeOSverifierfirstname']; ?>" readonly/><br/>
-	<input type="text" name="vlastName" value = "<?php echo $_SESSION['awesomeOSverifierlastname']; ?>" readonly/><br/>
+	</select>
+	<br/><label>Verified by: </label>
+	<input type="text" name="vusername" value = "<?php echo $_SESSION['awesomeOSverifierusername']; ?>" hidden/>
+	<input type="text" name="vfirstName" value = "<?php echo $_SESSION['awesomeOSverifierfirstname']; ?>" readonly/>
+	<input type="text" name="vlastName" value = "<?php echo $_SESSION['awesomeOSverifierlastname']; ?>" readonly/>
 	<br/>
 	<br/>
 <input type="submit" name="submitwholeform" value="Submit Equipment Logs" id="submitbtn"/>

@@ -1,5 +1,7 @@
+<?php
+include ("../CSS files/awesomeOSStyle.css");  
+?>
 <html>
-<link rel="stylesheet" type="text/css" href="../CSS files/awesomeOSStyle.css">
     <head>
          <title>Awesome OS Equipment Logs</title>
          <center>
@@ -14,13 +16,13 @@
 		<a href="displayequipments.php"><button id="navigation">Display Equipments</button></a>
 		<a href="displayequipmentlogs.php"><button id="navigation">Display Equipment Logs</button></a>
 		<?php
-		if (strcasecmp($_SESSION["awesomeOSverifierusername"], "admin") == 0) {
+		if (strpos($_SESSION["awesomeOSverifierusername"], "admin") !== false) {
 			?>
 			<a href="create_user.php"><button id="navigation">Create User</button></a>
 			<a href="deactivateuser.php"><button id="navigation">Display Users</button></a>
 		<?php
 		}
-		elseif (strcasecmp($_SESSION["awesomeOSverifierusername"], "admin") != 0) {
+		else {
 			?>
 						<a href="changepassword.php"><button id="navigation">Change Password</button></a>
 						<?php
@@ -30,7 +32,6 @@
         </div>
         </center>
 </head>
-<hr/>
 <body>
 <center>
  <div id="wholeBody">
