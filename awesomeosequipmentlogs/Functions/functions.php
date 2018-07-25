@@ -1,4 +1,6 @@
+
 <?php
+
 function test_input($data) {
 		  $data = trim($data);
 		  $data = stripslashes($data);
@@ -64,18 +66,7 @@ if($stmt = mysqli_prepare($link, $sql)){
 	?>
 
 </table>
-
-				<div id="changepassform" hidden>
-					<form onsubmit="submitNewPW(upw.value, uID.value);">
-					<label>User ID:</label>
-						<input type="text" id="uid" name="uID" value="" readonly=""><br/>
-					<label> New Password: </label>
-						<input type="password" id = "uPassw" name = "upw" value="" required>
-						<u><span id="show" onclick = "showpass()">Show Password</span></u><br/>
-					<input type="submit" name="submitNewPassword" value="Change Password" >
-					</form>
-				</div>
-
+</div>
 	<?php
 	return $num_rows;
 }

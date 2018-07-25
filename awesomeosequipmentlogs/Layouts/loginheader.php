@@ -1,5 +1,6 @@
+<?php
+include ("../CSS files/awesomeOSLoginStyle.css");  ?>
 <html>
-    <link rel="stylesheet" type="text/css" href="../CSS files/awesomeOSLoginStyle.css">
     <head>
          <title>Awesome OS Equipment Logs</title>
          <div id="main">

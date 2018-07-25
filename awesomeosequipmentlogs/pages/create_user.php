@@ -6,7 +6,7 @@ if (!isset($_SESSION["awesomeOSverifierusername"])|| is_null($_SESSION["awesomeO
   <?php
 }
 else{
-if (strcasecmp($_SESSION["awesomeOSverifierusername"], "admin") != 0) {
+if (strpos($_SESSION["awesomeOSverifierusername"], "admin") === true){
 	?>
 <META http-equiv="refresh" content = "0;URL=log-in.php">
   <?php

@@ -7,7 +7,7 @@ if (!isset($_SESSION["awesomeOSverifierusername"])|| is_null($_SESSION["awesomeO
 }
 
 else{
-if (strcasecmp($_SESSION["awesomeOSverifierusername"], "admin") != 0) {
+if (strpos($_SESSION["awesomeOSverifierusername"], "admin") === true){
 	?>
 <META http-equiv="refresh" content = "0;URL=log-in.php">
   <?php
@@ -45,6 +45,17 @@ elseif(isset($_POST["resetbtn"])){
 location.reload();
  }
  </script>
+ <div id="users">
+ <div id="changepassform" hidden>
+					<form onsubmit="submitNewPW(upw.value, uID.value);">
+					<label>User ID:</label>
+						<input type="text" id="uid" name="uID" value="" readonly=""><br/>
+					<label> New Password: </label>
+						<input type="password" id = "uPassw" name = "upw" value="" required>
+						<u><span id="show" onclick = "showpass()">Show Password</span></u><br/>
+					<input type="submit" name="submitNewPassword" value="Change Password" >
+					</form>
+				</div>
 <table id="allUsers">
 	<?php
 	printAllUsers($sql);

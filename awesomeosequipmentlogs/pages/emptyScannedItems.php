@@ -7,4 +7,5 @@ include ('config.php');
 													if (!mysqli_query($link, $sqlforemptyingtemptable)) {
 														die("yeah bitch");
 													}
+													
 ?>
