@@ -3,7 +3,6 @@
 session_start();
 
 if (!isset($_SESSION["awesomeOSverifierusername"])|| is_null($_SESSION["awesomeOSverifierusername"])) {
-   // header("location: log-in.php");
 	?>
 <META http-equiv="refresh" content = "0;URL=log-in.php">
   <?php
@@ -35,8 +34,11 @@ if (!isset($_POST["submit"])) {
 			}
 
 			if (empty($serialNumber_err)) {
-				   			header("location: enternewequipment.php?serialNumber=$serialNumber");
 
+				   			//header("location: enternewequipment.php?serialNumber=$serialNumber");
+				?>
+				<META http-equiv="refresh" content = "0;URL=enternewequipment.php?serialNumber=<?php echo $serialNumber; ?>">
+				<?php
 			}
 		}
 
@@ -46,7 +48,7 @@ if (!isset($_POST["submit"])) {
 <body>
 <form  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" >
 	<label>SCAN NEW ITEM </label>
-	<input type="text" name="serialNumber" required/><br/>	
+	<input type="text" autofocus="autofocus" name="serialNumber" required/><br/>	
 	<span id = "scan_error"><?php echo $serialNumber_err; ?></span><br/>
 	<input type="submit" name="submit" id="submitbtn"/>
 </form>

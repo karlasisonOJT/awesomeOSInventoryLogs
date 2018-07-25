@@ -1,3 +1,5 @@
+
+<style>
 body{
 	 /*background: linear-gradient(to left, #FF4500, #FF7F50, white, #FF7F50, #FF4500);*/
 	 border-style: solid;
@@ -34,3 +36,9 @@ form{
 #submitbtn:focus{
 	background-color: #DEB887;
 }
+#footer{	
+	height: 30px;
+	bottom: 0;
+	position: fixed;
+}
+</style>

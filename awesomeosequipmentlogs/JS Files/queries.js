@@ -7,35 +7,6 @@ function getName(){
     document.getElementById("password").value = lastName.toLowerCase()+ firstName.charAt(0).toLowerCase()+uID;
 }
 
-function enterItems(scannedcode, itemquantity, verifier, officetag) {
-    //alert(verifier+"-" +scannedcode+" "+itemquantity);
-   
-       //var scannedcode = document.getElementById("scancode").value;
-        if (scannedcode.length == 0) {
-        document.getElementById("scannedItems").innerHTML = "";
-        return;
-        }
-        else{
-            var xmlhttp2 = new XMLHttpRequest();
-        xmlhttp2.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                 location.reload();
-                //alert(this.responseText);
-             //   return false;
-
-                //document.getElementById("warningmessage").innerHTML = this.responseText;
-                if(this.responseText != ""){
-                    alert(this.responseText);
-                }
-            }
-        };
-  xmlhttp2.open("GET", "../Functions/getTable.php?serialcode=" + scannedcode+ "&verifier="+ verifier+"&qty=" + itemquantity +"&offtag=" +officetag, true);
-        xmlhttp2.send();
-        }
-
-        
-        }
-
 function item(serialNumber, officeTag, equipmentName, equipmentBrand, quantity){
     this.serial_number = serialNumber;
     this.office_tag = officeTag;
@@ -112,13 +83,15 @@ function getequipmentlog(tosearchequipmentlog) {
         }
 
 function showchangepassform(userID) {
+  
     var x = document.getElementById("changepassform");
-    if (x.style.display === "block") {
+    if (x.style.display == "block") {
         x.style.display = "none";
     } else {
         x.style.display = "block";
     }
     document.getElementById("uid").value = userID;
+
 }
 function showpass(){
     //alert("lol");
@@ -166,6 +139,7 @@ function getOfficeTags(serialNumber){
                if(this.responseText == "0"){
                alert("Serial Number not in the Database!");
                document.getElementById("scancode").value = "";
+               return false;
                }
                else{
                 return true;
@@ -198,9 +172,34 @@ span.onclick = function() {
 }
 
 // When the user clicks anywhere outside of the modal, close it
+//---------------------------------------------Modal reset button
+//Modal reset button---------------------------------------------
+// Get the modal
+var modal2 = document.getElementById('myModal2');
+
+// Get the button that opens the modal
+var btn2 = document.getElementById("myBtn2");
+
+// Get the <span> element that closes the modal
+var span2 = document.getElementsByClassName("close2")[0];
+
+// When the user clicks on the button, open the modal 
+btn2.onclick = function() {
+    modal2.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span2.onclick = function() {
+    modal2.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-    if (event.target == modal) {
+     if (event.target == modal) {
         modal.style.display = "none";
+    }
+    if (event.target == modal2) {
+        modal2.style.display = "none";
     }
 }
 
@@ -210,6 +209,8 @@ function cancelequipment(officetag){
     //var sn = document.getElementById(officetag).innerHTML;
     //alert(officetag);
     document.getElementById(officetag).style.display = "block";
+    document.getElementById("cancelbtn"+officetag).style.display = "none";
+    
 }
 function deletethis(offtag, id){
     //alert("delete " + offtag);
@@ -232,11 +233,12 @@ function deletethis(offtag, id){
 function canceldelete(ofctag){
     //alert("do not delete " + ofctag);
     document.getElementById(ofctag).style.display = "none";
+    document.getElementById("cancelbtn"+ofctag).style.display = "block";
 }
 function emptyTable(){
     //alert("delete " + offtag);
-     var xmlhttp9 = new XMLHttpRequest();
-        xmlhttp9.onreadystatechange = function() {
+     var xmlhttp10 = new XMLHttpRequest();
+        xmlhttp10.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 //document.getElementById("message").innerHTML = this.responseText +" matches found.";
               // document.getElementById("equipofficetag").innerHTML =this.responseText;
@@ -246,9 +248,14 @@ function emptyTable(){
                 //return false;
             }
         };
-  xmlhttp9.open("GET", "../pages/emptyScannedItems.php", true);
-        xmlhttp9.send();
+  xmlhttp10.open("GET", "../pages/emptyScannedItems.php", true);
+        xmlhttp10.send();
        
 }
 
+var scannedcount= document.getElementById("scancount").innerHTML;
+if (scannedcount==0) {
+    document.getElementById("myBtn").disabled = true;
+        document.getElementById("myBtn2").disabled = true;
+}
         </script>

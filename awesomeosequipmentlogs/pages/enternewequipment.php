@@ -82,7 +82,10 @@ if (empty($officeTag_err) && empty($equipmentName_err) && empty($equipmentBrand_
 			if(mysqli_stmt_execute($stmt)){
 
 				mysqli_stmt_close($stmt);
-				header("location: scannewequipment.php");
+			//	header("location: scannewequipment.php");
+				?>
+				<META http-equiv="refresh" content = "0;URL=displayequipments.php">
+				<?php
 			}
 		 else{
 				die(mysqli_error($link));
@@ -97,7 +100,10 @@ if (empty($officeTag_err) && empty($equipmentName_err) && empty($equipmentBrand_
 	}
 }
 else{
-	header("location: scannewequipment.php");
+	//header("location: scannewequipment.php");
+	?>
+	<META http-equiv="refresh" content = "0;URL=scannewequipment.php">
+	<?php
 }
 
 ?>
@@ -107,7 +113,7 @@ else{
 	<label>Serial Number: </label>
 	<input type="text" name="serialNumber" value="<?php echo $serialNumber; ?>" readonly/><br/>
 	<label>Office Tag: </label>
-	<input type="text" name="officeTag" value="<?php echo $officeTag; ?>" required/><br/>
+	<input type="text" name="officeTag" autofocus="autofocus" value="<?php echo $officeTag; ?>" required/><br/>
 	<span id = "scan_error"><?php echo $officeTag_err; ?></span><br/>
 	<label>Equipment Name: </label>
 	<input type="text" name="equipmentName" value="<?php echo $equipmentName; ?>" required/><br/>

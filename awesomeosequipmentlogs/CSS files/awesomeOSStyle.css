@@ -1,11 +1,18 @@
+<style>
 /*Header*/
 body{
 	background-color: #FFEFD5;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 #head{
     /*background-color: FF7F50;*/
     background: linear-gradient(to right, #FF4500, #FF7F50, white, #FF7F50, #FF4500);
     border-color: black;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 20%;
 }
 #logo_title{
 	display: inline-block;
@@ -23,28 +30,31 @@ body{
 	border-color: #E9967A;
 }
 #navigation:hover{
-	background-color: FFA07A;
+	background-color: #FFA07A;
 }
 #navigation:focus{
-	background-color: FF4500;
+	background-color: #FF4500;
 }
 /*Header*/
 #footer{	
 	height: 30px;
+	bottom: 0;
+	position: fixed;
 }
 #wholeBody{
+	margin-top: 12%;
 	width: 90%;
 	min-height: 100%;
     height: auto !important;
     margin-bottom: 0 auto -30px;
 }
 #leftdiv{
-	margin-top: 10px;
+	position: fixed;
 	float: left;
 	width: 30%;
 	min-height: 70%;
 	background-color: #FFDAB9;
-	border-radius: 10%;
+	border-radius: 5%;
 	border-style: solid;
 	border-size: 1px;
 	border-color: #FF6347;
@@ -55,29 +65,18 @@ body{
 	float: right;
 }
 
-/*#bottomleftrightdiv{
-background-color: white;
-display: inline;
-width: 50%;
 
-}
-#bottomrightrightdiv{
-	background-color: gray;
-float: right;
-	width: 50%
-}*/
 #borrowerform{
 	background-color: #FFE4B5;
 }
-#myBtn{
+#myBtn, #myBtn2{
 	padding: 10px;
 	background-color: FF6347;
 	border-color: E9967A;
-	width: 100%;
 	margin-top: 10%;
 }
 /* Reset button*/
-.modal {
+.modal, .modal2 {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -90,7 +89,7 @@ float: right;
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-.modal-content {
+.modal-content, .modal-content2 {
     background-color: #fefefe;
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
@@ -98,14 +97,16 @@ float: right;
     width: 50%; /* Could be more or less, depending on screen size */
 }
 
-.close {
+.close, .close 2 {
     color: #aaa;
     font-size: 28px;
     font-weight: bold;
 }
 
 .close:hover,
-.close:focus {
+.close:focus,
+.close2:hover,
+.close2:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
@@ -139,3 +140,75 @@ float: right;
 	background-color: #DEB887;
 }
 /* Reset button*/
+#negativebtn, #positivebtn {
+	color: white;
+	padding: 5px;
+	border-radius: 5px;
+	border-color: #E9967A;
+}
+#negativebtn{
+	background-color: #7D6608;
+}
+#positivebtn{
+	background-color: #6E2C00  ;
+}
+#scancode{
+	width: 90%;
+	background-color: #F39C12;
+	border-color: black;
+	min-height: 50px;
+	font-size: 100%;
+	text-align: center;
+	font-weight: bold;
+	border-radius: 4px;
+}
+span{
+	color: red;
+}
+
+#borrowerform{
+	width: 50%;
+	height: 30%;
+	position: fixed;
+	bottom: 0;
+}
+#equipofficetag, #eqty{
+	background-color: #F39C12;
+	border-color: black;
+	font-size: 100%;
+	text-align: center;
+	font-weight: bold;
+	border-radius: 4px;
+}
+
+#scannedItems{
+	text-align: left;
+	display: inline;
+}
+#scannedtable{
+	margin-bottom: 50%;
+}
+#question{
+	font-size: 10px;
+}
+#users{
+	display: inline;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20%;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+th{
+	height: 50px;
+	background-color: #EC7063;
+}
+tr:nth-child(even) {background-color: #FADBD8;}
+tr:hover {
+	background-color: #F2F3F4;
+}
+</style>
