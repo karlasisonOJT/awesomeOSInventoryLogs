@@ -57,7 +57,7 @@ if (isset($_GET["serialNumber"])) {
 					   		mysqli_stmt_store_result($stmt);
 					   		if(mysqli_stmt_num_rows($stmt) >0){
 					   			mysqli_stmt_close($stmt);
-					   			die("Office Tag".$officeTag." already in the database. Please scan another equipment.");
+					   			die("Office Tag".$officeTag." already in the database. Please <a href='scannewequipment.php'/> scan</a> another equipment.");
 					   		}
 					   		
 					   }
@@ -100,7 +100,6 @@ if (empty($officeTag_err) && empty($equipmentName_err) && empty($equipmentBrand_
 	}
 }
 else{
-	//header("location: scannewequipment.php");
 	?>
 	<META http-equiv="refresh" content = "0;URL=scannewequipment.php">
 	<?php
@@ -122,9 +121,9 @@ else{
 	<input type="text" name="equipmentBrand" value="<?php echo $equipmentBrand; ?>" required/><br/>
 	<span id = "scan_error"><?php echo $equipmentBrand_err; ?></span><br/>
 
-<input type="submit" name="submit"/>
+<input  id="submitbtn" type="submit" name="submit"/>
 </form>
-<a href="scannewequipment.php"><button>Cancel</button></a>
+<a href="displayequipments.php"><button  id="cancelbtn">Cancel</button></a>
 
 <?php
 include("../Layouts/footer.php"); 

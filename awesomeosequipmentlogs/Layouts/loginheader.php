@@ -1,7 +1,9 @@
 <?php
-include ("../CSS files/awesomeOSLoginStyle.css");  ?>
+include ("../CSS files/awesomeOSLoginStyle.css");  
+?>
 <html>
     <head>
+    	<link rel="shortcut icon" href="../Images/AOS favicon.png"; />
          <title>Awesome OS Equipment Logs</title>
          <div id="main">
          <center>

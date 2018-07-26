@@ -44,11 +44,8 @@ if (!isset($_POST["submit"])) {
 
  ?>
 
-<html>
-<body>
 <form  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" >
-	<label>SCAN NEW ITEM </label>
-	<input type="text" autofocus="autofocus" name="serialNumber" required/><br/>	
+	<input type="text" autofocus="autofocus" name="serialNumber" placeholder="SCAN NEW ITEM" required/><br/>	
 	<span id = "scan_error"><?php echo $serialNumber_err; ?></span><br/>
 	<input type="submit" name="submit" id="submitbtn"/>
 </form>

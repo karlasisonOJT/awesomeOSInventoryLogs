@@ -16,9 +16,9 @@ include ("../Functions/getTable.php");
 ?>
 
  <div id="leftdiv">
-<form  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method = "post" >
+<form id="scanform"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method = "post" >
 	<label> </label><br/>
-	<input id="scancode" type="text" name="serialNumber" autofocus="autofocus" onchange="getOfficeTags(this.value)" placeholder="SCAN ITEM HERE" required/><br/>	
+	<input id="scancode" type="text" name="serialNumber" autofocus onchange="getOfficeTags(this.value)" placeholder="SCAN ITEM HERE" required/><br/>	
 	<label>Office Tag</label><br/>
 	<select id="equipofficetag" name="officetag" required>
       </select>
@@ -37,7 +37,7 @@ include ("../Functions/getTable.php");
 
 		  <!-- Modal content -->
 		  <div class="modal-content">
-		  <p>Reset Sanned items?</p>
+		  <p>Reset Scanned items?</p>
 		    <span class="close"><button id="negativebtn" >No, back to scanning equipment</button>
 </span>
 		   	<button id="positivebtn" onclick="emptyTable()">Yes, reset scanned equipment</button>
@@ -53,7 +53,7 @@ include ("../Functions/getTable.php");
 <button id="myBtn">Reset Scanned Equipments </button>
 </div>
 <table id="scanned">
-				 	<thead>
+<thead>
 				 	 			<tr>
 				 	 			<th>Equipment Name</th>
 				 	 			<th>Equipment Brand</th>
@@ -61,9 +61,8 @@ include ("../Functions/getTable.php");
 				 	 			<th>Serial Number</th>
 				 	 			<th>Office Tag</th>
 				 	 			<th>Actions</th>				 	 			
-				 	 			</tr>
-				 	 	</thead>
-				 	 	<tbody >
+</thead>
+<tbody >
 				 	 		
 				 	 	
 <?php 

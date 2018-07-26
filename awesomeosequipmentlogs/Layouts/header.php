@@ -3,6 +3,7 @@ include ("../CSS files/awesomeOSStyle.css");
 ?>
 <html>
     <head>
+        <link rel="shortcut icon" href="../Images/AOS favicon.png"; />
          <title>Awesome OS Equipment Logs</title>
          <center>
          <div id="head">

@@ -29,15 +29,26 @@ if($stmt = mysqli_prepare($link, $sql)){
 			while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 				?>
 				<tr>
-					<td><?php echo $row["vFirstName"]." ".$row["vLastName"];?></td>
+					<td>
+					<?php
+					if ( $row["active"] ==1) {
+						echo "<img src='../Images/icons/active.ico'>";
+					}
+					else{
+						echo "<img src='../Images/icons/inactive.ico'>";
+					}
+					?>
+					<?php echo $row["vFirstName"]." ".$row["vLastName"];?></td>
 					<td id="<?php echo $row["vUsername"]; ?>"><?php echo $row["vUsername"];?></td>
 					<td> <?php
 					$userID = $row["verifierID"];
 					$activity = $row["active"];
 
 						
-					?><button onclick="changeStatus(<?php echo $userID; ?>, <?php echo $activity; ?>)" id="<?php echo $userID; ?>">
-
+					?><button class="negativebtn" onclick="changeStatus(<?php echo $userID; ?>, <?php echo $activity; ?>)" id="<?php echo $userID; ?>">
+					<script type="text/javascript">
+					 //writelabel(<?php echo $activity; ?>, <?php echo $userID; ?>);
+					</script>
 					<?php
 					if ($activity ==1) {
 						?>
@@ -51,8 +62,9 @@ if($stmt = mysqli_prepare($link, $sql)){
 						
 					}
 					?>
-					</button><span id ="<?php echo $userID; ?>" hidden><?php echo $userID; ?></span>
-					<button id="<?php echo $row["vUsername"]; ?>" onclick="showchangepassform(<?php echo $userID; ?>)">Change password</button>
+					</button>
+					<span id ="<?php echo $userID; ?>" hidden><?php echo $userID; ?></span>
+					<button class="positivebtn" id="<?php echo $row["vUsername"]; ?>" onclick="showchangepassform(<?php echo $userID; ?>)">Change password</button>
 						
 					</td>
 				</tr>

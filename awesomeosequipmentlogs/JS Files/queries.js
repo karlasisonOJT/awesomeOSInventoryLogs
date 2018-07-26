@@ -2,7 +2,9 @@
 function getName(){
     var uID = document.getElementById("uID").value;
     var firstName = document.getElementById("fname").value;
+    firstName = firstName.replace(/\s/g, '');
     var lastName = document.getElementById("lname").value;
+        lastName = lastName.replace(/\s/g, '');
     document.getElementById("username").value = firstName.toLowerCase() +lastName.toLowerCase()+uID;
     document.getElementById("password").value = lastName.toLowerCase()+ firstName.charAt(0).toLowerCase()+uID;
 }
@@ -21,19 +23,14 @@ function changeStatus(ID, activity){
         xmlhttp3.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
 
-                //alert(this.responseText);
-                
-                if (activity ==1) {
-                    document.getElementById(ID).innerHTML = "Activate";
-                    activity =2;
+                var newactivity = this.responseText;
+                if (newactivity==2) {
+                alert("User number "+ID+" successfully deactivated!");
                 }
-                else{
-                   document.getElementById(ID).innerHTML = "Deactivate";
-                    activity = 1;
+                else if (newactivity==1) {
+                alert("User number "+ID+" now active!");
                 }
-
-                //document.getElementById("warningmessage").innerHTML = this.responseText;
-
+                location.reload();
             }
         };
   xmlhttp3.open("GET", "../Functions/getUser.php?verifieruname=" + ID+"&activity="+activity, true);
@@ -139,9 +136,11 @@ function getOfficeTags(serialNumber){
                if(this.responseText == "0"){
                alert("Serial Number not in the Database!");
                document.getElementById("scancode").value = "";
+                document.getElementById("scancode").focus();
                return false;
                }
                else{
+                document.getElementById("equipofficetag").focus();
                 return true;
                }
                 //alert();
@@ -258,4 +257,16 @@ if (scannedcount==0) {
     document.getElementById("myBtn").disabled = true;
         document.getElementById("myBtn2").disabled = true;
 }
+
+                    function writelabel(activity, userid){
+                    if (activity == 1) {
+                        document.getElementById(userid).innerHTML="Deactivate";
+                        if (userid==1) {
+                        document.getElementById(userid).disabled = true;
+                        }
+                    }
+                    else{
+                        document.getElementById(userid).innerHTML="Activate";
+                    }
+                    }
         </script>

@@ -16,7 +16,6 @@ if($stmt = mysqli_prepare($link, $sql)){
 				$param_active = $newActivity;
 				$param_username = $username;
 				 if(mysqli_stmt_execute($stmt)){
-				 	
 				 	echo $newActivity;
 				 	mysqli_stmt_close($stmt);
 				 }
