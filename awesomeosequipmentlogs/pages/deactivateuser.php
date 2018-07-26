@@ -29,22 +29,22 @@ if (isset($_POST["submitSearch"])) {
 }
 elseif(isset($_POST["resetbtn"])){
 		$tosearch = "";
-	$sql = "SELECT * FROM verifier";
+		?>
+<META http-equiv="refresh" content = "0;URL=deactivateuser.php">
+  <?php
+	//$sql = "SELECT * FROM verifier";
 }
 ?>
  <div>
- 	<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" >
+ 	<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" id="searchdiv">
  		<input type="text" id="searchbox" name="tosearchname" placeholder = "Search Name/ Username" onkeyup= "getUser(this.value)" value="<?php echo $tosearch;?>" required>
-		<input type="submit" name="submitSearch" value="Search" >
- 		<input type="button" value="Reset Form" name="resetbtn" onclick="clr()">
+		<input id="submitbtn" type="submit" name="submitSearch" value="Search" >
  		<span id="message"></span>
  	</form>
+	<a href="deactivateuser.php"><button id="cancelbtn" >Reset Form</button></a>
+
  </div>
- <script type="text/javascript">
- function clr(){
-location.reload();
- }
- </script>
+ 
  <div id="users">
  <div id="changepassform" hidden>
 					<form onsubmit="submitNewPW(upw.value, uID.value);">
@@ -53,7 +53,7 @@ location.reload();
 					<label> New Password: </label>
 						<input type="password" id = "uPassw" name = "upw" value="" required>
 						<u><span id="show" onclick = "showpass()">Show Password</span></u><br/>
-					<input type="submit" name="submitNewPassword" value="Change Password" >
+					<input type="submit" name="submitNewPassword"  value="Change Password" >
 					</form>
 				</div>
 <table id="allUsers">

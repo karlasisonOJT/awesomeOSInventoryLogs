@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jul 25, 2018 at 06:16 PM
+-- Generation Time: Jul 26, 2018 at 06:00 PM
 -- Server version: 5.7.21
 -- PHP Version: 5.6.35
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `equipment` (
   `equipmentBrand` varchar(100) NOT NULL,
   `active` tinyint(1) NOT NULL,
   PRIMARY KEY (`equipmentID`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `equipment`
@@ -52,7 +52,8 @@ INSERT INTO `equipment` (`equipmentID`, `serialNumber`, `officeTag`, `equipmentN
 (9, '480010221049', 'ewrew', 'just another paper', 'paper', 1),
 (11, '480010221040', 'ghiepoqeo', 'kasks', 'kjskfd', 1),
 (12, 'TX1217000348', 'PS-0001', 'Power Supply', 'Intertek', 1),
-(13, 'R032030H00020', 'PWC-0001', 'Power Cord', 'Ganeric', 1);
+(13, 'R032030H00020', 'PWC-0001', 'Power Cord', 'Ganeric', 1),
+(14, '2029103129959', 'SCNR-1000', 'Barcode Scanner', 'FuzzyScan', 1);
 
 -- --------------------------------------------------------
 
@@ -74,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `equipment_logs` (
   `status` varchar(10) NOT NULL,
   `verifierID` int(3) NOT NULL,
   PRIMARY KEY (`logNumber`)
-) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `equipment_logs`
@@ -154,7 +155,9 @@ INSERT INTO `equipment_logs` (`logNumber`, `serialNumber`, `officeTag`, `borrowe
 (71, 'R032030H00020', 'PWC-0001', 'Marjune', '1', '2018-07-25', '17:24:39', 'Araullo', 1, 'Pulled Out', 1),
 (72, 'NXMXQSP011621034593400', 'fsssssssssas', 'Marjune', '1', '2018-07-25', '17:24:39', 'Araullo', 1, 'Pulled Out', 1),
 (73, '480010221040', 'ghiepoqee', 'Marjune', '1', '2018-07-25', '17:24:39', 'Araullo', 1, 'Pulled Out', 1),
-(74, 'NXMXQSP011621034593444', 'lekwRE', 'Marjune', '1', '2018-07-25', '17:24:39', 'Araullo', 1, 'Pulled Out', 1);
+(74, 'NXMXQSP011621034593444', 'lekwRE', 'Marjune', '1', '2018-07-25', '17:24:39', 'Araullo', 1, 'Pulled Out', 1),
+(75, '2029103129959', 'SCNR-1000', 'Karla', 'Siosn', '2018-07-26', '16:26:18', 'Araullo', 1, 'Deployed', 1),
+(76, '2029103129959', 'SCNR-1000', 'Amore', 'sss', '2018-07-26', '17:47:19', 'Landco', 1, 'Pulled Out', 2);
 
 -- --------------------------------------------------------
 
@@ -172,7 +175,7 @@ CREATE TABLE IF NOT EXISTS `scanned_equipments` (
   `equipmentBrand` varchar(100) NOT NULL,
   `quantity` int(5) NOT NULL,
   PRIMARY KEY (`equipmentID`)
-) ENGINE=InnoDB AUTO_INCREMENT=281 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -202,7 +205,7 @@ INSERT INTO `verifier` (`verifierID`, `vUsername`, `vPassword`, `vFirstName`, `v
 (4, 'camillesanico4', '0ca54c9b19517c919299ad68c27c537b', 'Camille', 'Sanico', 1),
 (5, 'aljohnbajao5', '60ec5050008b2a01b237bbf1c2914084', 'Aljohn', 'Bajao', 1),
 (6, 'iacamelleperalta6', 'b1d71b314220a16de05eb5b84ce900c4', 'IaCamelle', 'Peralta', 1),
-(7, 'aracorsiga7', 'f7cb220555e699e70f0cd4430182d041', 'Ara', 'Corsiga', 1),
+(7, 'aracorsiga7', 'f7cb220555e699e70f0cd4430182d041', 'Ara', 'Corsiga', 2),
 (8, 'admin sarrahgellecancia8', '26eadfdeb789f452864bf762d0122098', 'Admin Sarrah', 'Gellecancia', 1);
 COMMIT;
 

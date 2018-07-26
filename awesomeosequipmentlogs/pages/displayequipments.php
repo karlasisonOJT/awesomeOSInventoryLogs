@@ -29,8 +29,8 @@ elseif(isset($_POST["reset"])){
 <div>
  	<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" >
  		<input type="text" id="equipmentsearchbox" name="tosearchequipment" placeholder = "Search Equipment" onkeyup= "getequipment(this.value)" value="<?php echo $tosearch;?>" required>
- 		<input type="submit" name="search" value="Search" >
- 		<input type="submit" value="Reset Form" name="reset">
+ 		<input id="submitbtn" type="submit" name="search" value="Search" >
+ 		<input id="cancelbtn" type="submit" value="Reset Form" name="reset">
  	</form>
  </div>
   		<span id="message"></span>

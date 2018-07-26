@@ -99,7 +99,7 @@ $sql = "SELECT * FROM verifier";
 
 				if ($result = mysqli_query($link, $sql)) {
 					$ID = mysqli_num_rows($result) + 1;
-					echo $ID;
+					//echo $ID;
 				}
  ?>
 <html>

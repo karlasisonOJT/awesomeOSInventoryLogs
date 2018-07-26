@@ -97,10 +97,8 @@ elseif (isset($_POST["submit"])) {
                             $_SESSION['awesomeOSverifierlastname'] = $vLastName;
                             $_SESSION["awesomeOSverifierID"] = $verifierid;
                             //die($hashed_password." - ". $verifierpassword." - ".$_SESSION['awesomeOSverifierusername'] ."<br/>".$_SESSION['awesomeOSverifierfirstname']." ".$_SESSION['awesomeOSverifierlastname']);
-                                //header("location: scan.php?user=$_SESSION[awesomeOSverifierusername]");
-                                                  ?>
-                      <META http-equiv="refresh" content = "0;URL=scan.php">
-                        <?php
+                               // header("location: scan.php?user=$_SESSION[awesomeOSverifierusername]");
+                                                  echo " <META http-equiv='refresh' content = '0;URL=scan.php'>";
                     		}
                     		else{
                     		 $verifierpassword_err = 'Incorrect password.';                 			

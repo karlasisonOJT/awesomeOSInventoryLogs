@@ -140,16 +140,16 @@ body{
 	background-color: #DEB887;
 }
 /* Reset button*/
-#negativebtn, #positivebtn {
+#negativebtn, #positivebtn , .positivebtn, .negativebtn{
 	color: white;
 	padding: 5px;
 	border-radius: 5px;
 	border-color: #E9967A;
 }
-#negativebtn{
+#negativebtn, .negativebtn{
 	background-color: #7D6608;
 }
-#positivebtn{
+#positivebtn, .positivebtn{
 	background-color: #6E2C00  ;
 }
 #scancode{
@@ -210,5 +210,11 @@ th{
 tr:nth-child(even) {background-color: #FADBD8;}
 tr:hover {
 	background-color: #F2F3F4;
+}
+#searchdiv{
+	display: inline;
+}
+form{
+	display: inline;
 }
 </style>

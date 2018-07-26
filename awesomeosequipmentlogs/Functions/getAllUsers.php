@@ -16,3 +16,4 @@ $sql= "SELECT * FROM verifier";
 	$num_rows = printAllUsers($sql);
 	echo $num_rows;
 	?>
+	
