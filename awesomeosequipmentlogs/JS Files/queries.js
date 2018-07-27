@@ -65,12 +65,12 @@ function getequipment(tosearchequipment) {
         
         }
 function getequipmentlog(tosearchequipmentlog) {
-   
         var xmlhttp6 = new XMLHttpRequest();
         xmlhttp6.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("message").innerHTML = this.responseText +" matches found.";
                 document.getElementById("allequipmentlogs").innerHTML ="";
+                 document.getElementById("searchform").display ="block";
                // alert("jjj");
             }
         };
@@ -81,7 +81,7 @@ function getequipmentlog(tosearchequipmentlog) {
 
 function showchangepassform(userID) {
   
-    var x = document.getElementById("changepassform");
+    var x = document.getElementById("changepassform"+userID);
     if (x.style.display == "block") {
         x.style.display = "none";
     } else {
@@ -90,9 +90,15 @@ function showchangepassform(userID) {
     document.getElementById("uid").value = userID;
 
 }
-function showpass(){
+function hideform(verifierid) {
+  
+document.getElementById("changepassform"+verifierid).style.display="none";
+document.getElementById("uPassw"+verifierid).value="";
+
+}
+function showpass(vID){
     //alert("lol");
-    var pw = document.getElementById("uPassw");
+    var pw = document.getElementById("uPassw"+vID);
     if (pw.value != "") {
     if (pw.type == "text"){
         pw.type= "password";
@@ -115,9 +121,10 @@ function submitNewPW(upw, uID){
      var xmlhttp7 = new XMLHttpRequest();
         xmlhttp7.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
+                                alert(this.responseText);
+
                 //document.getElementById("message").innerHTML = this.responseText +" matches found.";
                // document.getElementById("allequipmentlogs").innerHTML ="";
-                alert(this.responseText);
                 return false;
             }
         };

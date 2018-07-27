@@ -128,13 +128,13 @@ $sql = "SELECT * FROM scanned_equipments WHERE vUsername = ? ORDER BY equipmentI
 
  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method = "post" >
  	<label>Borrower: </label>
-	<input type="text" name="bfirstName" placeholder = "Borrower's First Name" required/>
-	<input type="text" name="blastName" placeholder = "Borrower's Last Name" required/><br/>
+	<input class="awesometextareas" type="text" name="bfirstName" placeholder = "Borrower's First Name" required/>
+	<input class="awesometextareas" type="text" name="blastName" placeholder = "Borrower's Last Name" required/><br/>
 	<span><?php echo $bfname_err; ?></span>
 	<span><?php echo $blastName_err; ?></span>
 	<br/>
 	<label>Site: </label>
-	<select name="site" required>
+	<select class="awesometextareas" name="site" required>
 		<option></option>
 		<option value="Araullo"> Araullo </option>
 		<option value="Landco"> Landco </option>
@@ -148,15 +148,15 @@ $sql = "SELECT * FROM scanned_equipments WHERE vUsername = ? ORDER BY equipmentI
 	</select>
 
 	<label>Status: </label>
-	<select name = "status" required>
+	<select class="awesometextareas" name = "status" required>
 		<option></option>
 		<option value="Deployed">Deploy</option>
 		<option value="Pulled Out"> Pull out</option>
 	</select>
 	<br/><label>Verified by: </label>
-	<input type="text" name="vusername" value = "<?php echo $_SESSION['awesomeOSverifierusername']; ?>" hidden/>
-	<input type="text" name="vfirstName" value = "<?php echo $_SESSION['awesomeOSverifierfirstname']; ?>" readonly/>
-	<input type="text" name="vlastName" value = "<?php echo $_SESSION['awesomeOSverifierlastname']; ?>" readonly/>
+	<input class="awesometextareas" type="text" name="vusername" value = "<?php echo $_SESSION['awesomeOSverifierusername']; ?>" hidden/>
+	<input class="awesometextareas" type="text" name="vfirstName" value = "<?php echo $_SESSION['awesomeOSverifierfirstname']; ?>" readonly/>
+	<input class="awesometextareas" type="text" name="vlastName" value = "<?php echo $_SESSION['awesomeOSverifierlastname']; ?>" readonly/>
 	<br/>
 	<br/>
 <input type="submit" name="submitwholeform" value="Submit Equipment Logs" id="submitbtn"/>
