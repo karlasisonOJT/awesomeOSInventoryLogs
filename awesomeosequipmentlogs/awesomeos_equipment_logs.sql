@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jul 26, 2018 at 06:00 PM
+-- Generation Time: Jul 27, 2018 at 05:54 PM
 -- Server version: 5.7.21
 -- PHP Version: 5.6.35
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `equipment` (
   `equipmentBrand` varchar(100) NOT NULL,
   `active` tinyint(1) NOT NULL,
   PRIMARY KEY (`equipmentID`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `equipment`
@@ -53,7 +53,8 @@ INSERT INTO `equipment` (`equipmentID`, `serialNumber`, `officeTag`, `equipmentN
 (11, '480010221040', 'ghiepoqeo', 'kasks', 'kjskfd', 1),
 (12, 'TX1217000348', 'PS-0001', 'Power Supply', 'Intertek', 1),
 (13, 'R032030H00020', 'PWC-0001', 'Power Cord', 'Ganeric', 1),
-(14, '2029103129959', 'SCNR-1000', 'Barcode Scanner', 'FuzzyScan', 1);
+(14, '2029103129959', 'SCNR-1000', 'Barcode Scanner', 'FuzzyScan', 1),
+(15, 'CND04922K0', 'LT 20000', 'Laptop', 'Hewlett-Packard 8440p', 1);
 
 -- --------------------------------------------------------
 
@@ -75,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `equipment_logs` (
   `status` varchar(10) NOT NULL,
   `verifierID` int(3) NOT NULL,
   PRIMARY KEY (`logNumber`)
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `equipment_logs`
@@ -157,7 +158,9 @@ INSERT INTO `equipment_logs` (`logNumber`, `serialNumber`, `officeTag`, `borrowe
 (73, '480010221040', 'ghiepoqee', 'Marjune', '1', '2018-07-25', '17:24:39', 'Araullo', 1, 'Pulled Out', 1),
 (74, 'NXMXQSP011621034593444', 'lekwRE', 'Marjune', '1', '2018-07-25', '17:24:39', 'Araullo', 1, 'Pulled Out', 1),
 (75, '2029103129959', 'SCNR-1000', 'Karla', 'Siosn', '2018-07-26', '16:26:18', 'Araullo', 1, 'Deployed', 1),
-(76, '2029103129959', 'SCNR-1000', 'Amore', 'sss', '2018-07-26', '17:47:19', 'Landco', 1, 'Pulled Out', 2);
+(76, '2029103129959', 'SCNR-1000', 'Amore', 'sss', '2018-07-26', '17:47:19', 'Landco', 1, 'Pulled Out', 2),
+(77, '2029103129959', 'SCNR-1000', 'Aljohn', 'Bajao', '2018-07-27', '7:23:46', 'Araullo', 1, 'Deployed', 8),
+(78, 'CND04922K0', 'LT 20000', 'Aljohn', 'Bajao', '2018-07-27', '7:23:46', 'Araullo', 1, 'Deployed', 8);
 
 -- --------------------------------------------------------
 
@@ -175,7 +178,14 @@ CREATE TABLE IF NOT EXISTS `scanned_equipments` (
   `equipmentBrand` varchar(100) NOT NULL,
   `quantity` int(5) NOT NULL,
   PRIMARY KEY (`equipmentID`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `scanned_equipments`
+--
+
+INSERT INTO `scanned_equipments` (`equipmentID`, `vUsername`, `serialNumber`, `officeTag`, `equipmentName`, `equipmentBrand`, `quantity`) VALUES
+(5, 'admin', '2029103129959', 'SCNR-1000', 'Barcode Scanner', 'FuzzyScan', 1);
 
 -- --------------------------------------------------------
 
@@ -192,7 +202,7 @@ CREATE TABLE IF NOT EXISTS `verifier` (
   `vLastName` varchar(50) NOT NULL,
   `active` int(1) NOT NULL,
   PRIMARY KEY (`verifierID`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `verifier`
@@ -200,13 +210,16 @@ CREATE TABLE IF NOT EXISTS `verifier` (
 
 INSERT INTO `verifier` (`verifierID`, `vUsername`, `vPassword`, `vFirstName`, `vLastName`, `active`) VALUES
 (1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'AwesomeOS', 'Admin', 1),
-(2, 'karlasison2', 'dba1d50381db809d0b755fab5e3ce89f', 'Karla', 'Sison', 1),
-(3, 'nicholesison3', '996cf3f594f1219cda3e4524854ea48c', 'Nichole', 'Sison', 1),
-(4, 'camillesanico4', '0ca54c9b19517c919299ad68c27c537b', 'Camille', 'Sanico', 1),
+(2, 'karlasison2', 'eb51530e5dd519b1ad81754c7005d661', 'Karla', 'Sison', 1),
+(3, 'nicholesison3', '584ae3a6ab89d67b476b2e732e7f73d6', 'Nichole', 'Sison', 1),
+(4, 'camillesanico4', 'dd2d18cd5f926f918e9f0a1bb7686418', 'Camille', 'Sanico', 1),
 (5, 'aljohnbajao5', '60ec5050008b2a01b237bbf1c2914084', 'Aljohn', 'Bajao', 1),
-(6, 'iacamelleperalta6', 'b1d71b314220a16de05eb5b84ce900c4', 'IaCamelle', 'Peralta', 1),
-(7, 'aracorsiga7', 'f7cb220555e699e70f0cd4430182d041', 'Ara', 'Corsiga', 2),
-(8, 'admin sarrahgellecancia8', '26eadfdeb789f452864bf762d0122098', 'Admin Sarrah', 'Gellecancia', 1);
+(6, 'iacamelleperalta6', '7e91e3e30b5e43bbd87eb9ab90d8569c', 'IaCamelle', 'Peralta', 1),
+(7, 'aracorsiga7', '2d11ac433cc6ee14669e0cac71026a5c', 'Ara', 'Corsiga', 1),
+(8, 'admin sarrahgellecancia8', '702306e0eec2a019651520c5fc279628', 'Admin Sarrah', 'Gellecancia', 1),
+(9, 'adminalfiddunno9', '618e9ae05869a3d7fdde6d59049ae1d2', 'Admin Alfid', 'Dunno', 1),
+(10, 'adminchesterdunno210', '769845eeea75fb8bba94809e080232f3', 'Admin Chester', 'Dunno2', 2),
+(11, 'adminchristianoronaldo11', 'c5aa3124b1adad080927ce4d144c6b33', 'Admin Christiano', 'Ronaldo', 1);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

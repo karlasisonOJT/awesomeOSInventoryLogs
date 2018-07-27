@@ -22,6 +22,14 @@ include ('config.php');
 <?php 
 $vfname = $vlname = $vusername = $vpassword = "";
 $vfname_err = $vlname_err = $vusername_err = $vpassword_err = "";
+
+
+$sql = "SELECT * FROM verifier";
+
+				if ($result = mysqli_query($link, $sql)) {
+					$ID = mysqli_num_rows($result) + 1;
+					//echo $ID;
+				}
  ?>
  <?php
 
@@ -78,6 +86,10 @@ elseif (isset($_POST["submit"])) {
 			mysqli_stmt_close($stmt);
 		$vfname = $vlname = $vusername = $vpassword = "";
 		$vfname_err = $vlname_err = $vusername_err = $vpassword_err = "";
+		echo "<script>
+		alert('Successfully created user number $ID')
+		</script>
+		";
 		}
 	 else{
 			die(mysqli_error($link));
@@ -95,32 +107,26 @@ elseif (isset($_POST["submit"])) {
 
 }
 
-$sql = "SELECT * FROM verifier";
-
-				if ($result = mysqli_query($link, $sql)) {
-					$ID = mysqli_num_rows($result) + 1;
-					//echo $ID;
-				}
  ?>
 <html>
 <body>
 <form id = "createUser" name = "createUser" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post">
 
 	<input type="text" id="uID" value="<?php echo $ID;?>" hidden/>
-	<label>First Name: </label>
-	<input type="text" id = "fname" name="ufname" maxlength="50" onkeyup ="getName();" value = "<?php echo $vfname;?>" required/><br/>
+	<label>First Name: </label><br/>
+	<input class="awesometextareas" type="text" id = "fname" name="ufname" maxlength="50" onkeyup ="getName();" value = "<?php echo $vfname;?>" required/><br/>
 	<span id=""><?php echo $vfname_err;?> </span><br/>
 
-	<label>Last Name: </label>
-	<input type="text" id = "lname" name="ulname" maxlength="50" onkeyup="getName();" value = "<?php echo $vlname;?>" required/><br/>
+	<label>Last Name: </label><br/>
+	<input class="awesometextareas" type="text" id = "lname" name="ulname" maxlength="50" onkeyup="getName();" value = "<?php echo $vlname;?>" required/><br/>
 	<span id=""><?php echo $vlname_err;?> </span><br/>
 
-	<label>Username: </label>
-	<input type="text" id = "username" name="username"  maxlength="50" value = "<?php echo $vusername;?>" readonly/><br/>
+	<label>Username: </label><br/>
+	<input class="awesometextareas" type="text" id = "username" name="username"  maxlength="50" value = "<?php echo $vusername;?>" readonly/><br/>
 	<span id=""><?php echo $vusername_err;?></span><br/>
 
-	<label>USER PASSWORD: </label>
-	<input type="text" id = "password" name="upassword"  value = "<?php echo $vpassword;?>" readonly/><br/>
+	<label>USER PASSWORD: </label><br/>
+	<input class="awesometextareas" type="text" id = "password" name="upassword"  value = "<?php echo $vpassword;?>" readonly/><br/>
 	<span id=""><?php echo $vpassword_err;?></span><br/>
 
 	<input type="submit" name="submit" id="submitbtn"/>

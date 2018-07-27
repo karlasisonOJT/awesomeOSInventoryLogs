@@ -4,6 +4,17 @@ body{
 	background-color: #FFEFD5;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
+.awesometextareas{
+	background-color: #F5DEB3;
+	border-style: solid;
+	border-color: grey;
+	border-radius: 5px;
+	height: 5%;
+	text-align: center;
+}
+.awesometextareas:focus{
+		background-color: #FFE4E1;
+}
 #head{
     /*background-color: FF7F50;*/
     background: linear-gradient(to right, #FF4500, #FF7F50, white, #FF7F50, #FF4500);
