@@ -65,7 +65,16 @@ if($stmt = mysqli_prepare($link, $sql)){
 					</button>
 					<span id ="<?php echo $userID; ?>" hidden><?php echo $userID; ?></span>
 					<button class="positivebtn" id="<?php echo $row["vUsername"]; ?>" onclick="showchangepassform(<?php echo $userID; ?>)">Change password</button>
-						
+					  <div id="changepassform<?php echo $userID; ?>" hidden>
+					<form onsubmit="submitNewPW(upw.value, uID.value);">
+						<input class="awesometextareas" type="text" id="uid" name="uID" value="<?php echo $userID; ?>" hidden><br/>
+					<label> New Password: </label>
+						<input class="awesometextareas" type="password" id = "uPassw<?php echo $userID; ?>" name = "upw" value="" required>
+						<u><span id="show" onmousedown = "showpass(<?php echo $userID; ?>)">Show Password</span></u><br/>
+					<input type="submit" name="submitNewPassword"  value="Change Password" >
+					</form>
+					<button onclick="hideform(<?php echo $userID; ?>)">X</button>
+				</div>
 					</td>
 				</tr>
 		<?php
@@ -128,6 +137,7 @@ $num_rows = mysqli_num_rows($result);
 ?>
 <thead>
 		<tr>
+			<th>Number</th>
 			<th>Brand</th>
 			<th>Name</th>
 			<th>Serial Code</th>
@@ -148,7 +158,9 @@ if($stmt = mysqli_prepare($link, $sql)){
 		$result = mysqli_stmt_get_result($stmt);
 			while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 				?>
+
 				<tr>
+						<td><?php echo $row["logNumber"];?></td>
 					<td><?php echo $row["equipmentBrand"];?></td>
 					<td><?php echo $row["equipmentName"];?></td>
 					<td><?php echo $row["serialNumber"];?></td>

@@ -25,10 +25,10 @@ elseif(isset($_POST["reset"])){
 	$sql = "SELECT * FROM equipment";
 }
 ?>
-<div> <a href="scannewequipment.php"><button id="navigation">Scan new equipment</button></a></div>
+<div> <a href="enternewequipment.php"><button id="navigation">Scan new equipment</button></a></div>
 <div>
  	<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" >
- 		<input type="text" id="equipmentsearchbox" name="tosearchequipment" placeholder = "Search Equipment" onkeyup= "getequipment(this.value)" value="<?php echo $tosearch;?>" required>
+ 		<input class="awesometextareas" type="text" id="equipmentsearchbox" name="tosearchequipment" placeholder = "Search Equipment" onkeyup= "getequipment(this.value)" value="<?php echo $tosearch;?>" required>
  		<input id="submitbtn" type="submit" name="search" value="Search" >
  		<input id="cancelbtn" type="submit" value="Reset Form" name="reset">
  	</form>

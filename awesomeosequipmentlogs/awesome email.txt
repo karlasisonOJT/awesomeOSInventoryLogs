@@ -1,0 +1,24 @@
+awesome_outsourcing@outlook.com
+pass:
+ITpass18
+
+host: hostbuddy.com
+log-in: awesomeOS pass: ITpass18
+
+MYSQL: mysql7001.site4now.net
+Username: a3f071_aoslogs
+pass: ITpass18
+
+   Hosting Account ID:	awesomeos-001
+      First Website Root Folder Name:	site1
+      First Website Type:	PHP
+      Hosting Plan Name:	W60-US
+      	
+      	Please Record The Following FTP Infomation:
+      FTP Address :	FTP.SITE4NOW.NET
+      FTP Username :	awesomeos-001
+      FTP Password :	(same as your control panel password)
+      FTP Directory	\
+
+
+http://awesomeos-001-site1.1tempurl.com/pages/log-in.php

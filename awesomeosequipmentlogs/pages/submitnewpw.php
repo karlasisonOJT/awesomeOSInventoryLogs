@@ -12,7 +12,7 @@ if($stmt = mysqli_prepare($link, $sql)){
 				$param_userid = $userid;
 				 if(mysqli_stmt_execute($stmt)){
 				 	
-				 		$message = "Password change successful for user ". $userid. "<br/>New Password: ".$userpw;
+				 		$message = "Password change successful for user ". $userid. ". New Password: ".$userpw;
 
 				 	mysqli_stmt_close($stmt);
 				 }

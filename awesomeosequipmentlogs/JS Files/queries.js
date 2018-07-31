@@ -65,12 +65,14 @@ function getequipment(tosearchequipment) {
         
         }
 function getequipmentlog(tosearchequipmentlog) {
-   
         var xmlhttp6 = new XMLHttpRequest();
         xmlhttp6.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("message").innerHTML = this.responseText +" matches found.";
                 document.getElementById("allequipmentlogs").innerHTML ="";
+                document.getElementById("resultpages").innerHTML ="";
+                 document.getElementById("divpages").innerHTML ="";
+                 document.getElementById("searchform").display ="block";
                // alert("jjj");
             }
         };
@@ -81,7 +83,7 @@ function getequipmentlog(tosearchequipmentlog) {
 
 function showchangepassform(userID) {
   
-    var x = document.getElementById("changepassform");
+    var x = document.getElementById("changepassform"+userID);
     if (x.style.display == "block") {
         x.style.display = "none";
     } else {
@@ -90,9 +92,15 @@ function showchangepassform(userID) {
     document.getElementById("uid").value = userID;
 
 }
-function showpass(){
+function hideform(verifierid) {
+  
+document.getElementById("changepassform"+verifierid).style.display="none";
+document.getElementById("uPassw"+verifierid).value="";
+
+}
+function showpass(vID){
     //alert("lol");
-    var pw = document.getElementById("uPassw");
+    var pw = document.getElementById("uPassw"+vID);
     if (pw.value != "") {
     if (pw.type == "text"){
         pw.type= "password";
@@ -110,14 +118,34 @@ function showpass(){
     }
     }
 }
+function showpassind(){
+    var pass = document.getElementById("uPassw");
+    if (pass.value != "") {
+    if (pass.type == "text"){
+        pass.type= "password";
+        
+        document.getElementById("show").innerHTML = "Show Password";
+         document.getElementById("uPasswconfirm").type = "password";
+               
+
+    }
+    else{
+         pass.type= "text";
+
+        document.getElementById("show").innerHTML = "Hide Password";
+        document.getElementById("uPasswconfirm").type = "text";
+    }
+    }
+}
 function submitNewPW(upw, uID){
    // alert(upw + " = "+ uID);
      var xmlhttp7 = new XMLHttpRequest();
         xmlhttp7.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
+                                alert(this.responseText);
+
                 //document.getElementById("message").innerHTML = this.responseText +" matches found.";
                // document.getElementById("allequipmentlogs").innerHTML ="";
-                alert(this.responseText);
                 return false;
             }
         };
@@ -269,4 +297,54 @@ if (scannedcount==0) {
                         document.getElementById(userid).innerHTML="Activate";
                     }
                     }
+function paginateresults(pagedivision, rescount, querystrng){
+    //var querystrng= ;
+ //  alert(pagedivision +": "+ rescount+" "+querystrng);
+    var xmlhttp11 = new XMLHttpRequest();
+        xmlhttp11.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                //document.getElementById("message").innerHTML = this.responseText +" matches found.";
+              // document.getElementById("equipofficetag").innerHTML =this.responseText;
+                //alert(this.responseText);
+            if (pagedivision!="Show All") {
+      //   alert(pagedivision +": "+ rescount+" "+querystrng);
+                    document.getElementById("resultpages"). innerHTML=this.responseText;
+
+
+            }
+            else{
+                loadall();
+            }
+                //alert();
+                //return false;
+            }
+        };
+  xmlhttp11.open("GET", "../pages/getpagenums.php?divideinto="+pagedivision+"&resultcnt="+rescount +"&qrystrng=" + querystrng , true);
+        xmlhttp11.send();
+}
+function divideresults(cnt,roffset,sqlstrng){
+   // alert(cnt+". " +roffset+" "+sqlstrng);
+    var xmlhttp12 = new XMLHttpRequest();
+        xmlhttp12.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                //document.getElementById("message").innerHTML = this.responseText +" matches found.";
+              // document.getElementById("equipofficetag").innerHTML =this.responseText;
+                //alert(this.responseText);
+              document.getElementById("allequipmentlogs").innerHTML = this.responseText;
+ //               alert(cnt+". " +roffset+" "+sqlstrng);
+                //alert(this.responseText);
+                 document.getElementById("searchform").display ="block";
+
+                //alert();
+                //return false;
+            }
+        };
+                  xmlhttp12.open("GET", "../pages/divideresults.php?rcount="+cnt+"&resoffset="+roffset +"&qry=" + sqlstrng , true);        
+                  xmlhttp12.send();
+}
+      function    loadall(){
+        alert("SELECT * FROM (equipment_logs LEFT JOIN equipment ON equipment_logs.officeTag = equipment.officeTag) LEFT JOIN verifier ON equipment_logs.verifierID= verifier.verifierID ORDER BY  equipment_logs.logNumber desc");
+      }
         </script>
+
+       

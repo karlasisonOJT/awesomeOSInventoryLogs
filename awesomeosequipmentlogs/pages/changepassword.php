@@ -50,14 +50,21 @@ elseif (isset($_POST["changePassword"])) {
 						 if(mysqli_stmt_execute($stmt)){
 						 	
 						 		//$message = "Password change successful for user ". $userid. "<br/>New Password: ".$userpw;
-
 						 	mysqli_stmt_close($stmt);
+						 	echo "<script>
+						 	alert('Success! New password is $confirmpass');
+						 	</script>
+						 	";
 						 }
 						 else{
-							die(mysqli_error($link));
+							die("Password change unsuccessful! Please contact your admin about this error: ". mysqli_error($link));
 						 	//$username = mysqli_error($link);
 						 }
 		}
+		else{
+							die("Password change unsuccessful! Please contact your admin about this error: ". mysqli_error($link));
+						 	//$username = mysqli_error($link);
+						 }
 
 	}
 
@@ -67,17 +74,18 @@ elseif (isset($_POST["changePassword"])) {
 
 				<div id="changeownpass" >
 					<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post">
-					<label>User ID:</label>
-						<input type="text" id="uid" name="uID" value="<?php echo $userID;?>" readonly=""><br/>
-					<label> New Password: </label>
-						<input type="password" id = "uPassw" name = "upw" value="" required>
-						<u><span id="show" onclick = "showpass()">Show Password</span></u><br/>
+					<label>User ID:</label><br/>
+						<input class="awesometextareas" type="text" id="uid" name="uID" value="<?php echo $userID;?>" readonly=""><br/>
+					<label> New Password: </label><br/>
+						<input class="awesometextareas" type="password" id = "uPassw" name = "upw" value="" required><br/>
+						<u><span id="show" onclick = "showpassind()">Show Password</span></u><br/>
 						<span><?php echo $newpass_err;?></span><br/>
-					<label> Confirm Password: </label>
-						<input type="password" id = "uPasswconfirm" name = "upwconfirm" value="" required><br/>
+					<label> Confirm Password: </label><br/>
+						<input class="awesometextareas" type="password" id = "uPasswconfirm" name = "upwconfirm" value="" required><br/>
 						<span><?php echo $confirmpass_err;?></span><br/>
-					<input type="submit" name="changePassword" value="Change Password" >
+					<input id="submitbtn" type="submit" name="changePassword" value="Change Password" >
 					</form>
+					<button id="cancelbtn">Cancel</button>
 				</div>
 <?php
 include("../JS Files/queries.js"); 

@@ -15,19 +15,23 @@ include ('config.php');
 
 ?>
 <?php
-$officeTag = $equipmentName = $equipmentBrand = "";
-		$officeTag_err = $equipmentName_err = $equipmentBrand_err = "";
-if (isset($_GET["serialNumber"])) {
-	$serialNumber = trim($_GET["serialNumber"]);
-
-				
-	if (!isset($_POST["submit"])) {
+$serialNumber=$officeTag = $equipmentName = $equipmentBrand = "";
+$serialNumber_err= $officeTag_err = $equipmentName_err = $equipmentBrand_err = "";
+		
+		if (!isset($_POST["submit"])) {
 		$officeTag = $equipmentName = $equipmentBrand = "";
 		$officeTag_err = $equipmentName_err = $equipmentBrand_err = "";
 	}
 	elseif (isset($_POST["submit"])) {
-		$officeTag = $equipmentName = $equipmentBrand = "";
-		$officeTag_err = $equipmentName_err = $equipmentBrand_err = "";
+			$serialNumber=$officeTag = $equipmentName = $equipmentBrand = "";
+			$serialNumber_err= $officeTag_err = $equipmentName_err = $equipmentBrand_err = "";
+
+		if (empty(trim($_POST["serialNumber"]))) {
+			$serialNumber_err = "Please fill this field";
+		}
+		else{
+			$serialNumber = trim($_POST["officeTag"]);
+		}
 
 		if (empty(trim($_POST["officeTag"]))) {
 			$officeTag_err = "Please fill this field";
@@ -57,7 +61,7 @@ if (isset($_GET["serialNumber"])) {
 					   		mysqli_stmt_store_result($stmt);
 					   		if(mysqli_stmt_num_rows($stmt) >0){
 					   			mysqli_stmt_close($stmt);
-					   			die("Office Tag".$officeTag." already in the database. Please <a href='scannewequipment.php'/> scan</a> another equipment.");
+					   			die("Office Tag".$officeTag." already in the database. Please <a href='enternewequipment.php'/> scan</a> another equipment.");
 					   		}
 					   		
 					   }
@@ -97,28 +101,22 @@ if (empty($officeTag_err) && empty($equipmentName_err) && empty($equipmentBrand_
 		}
 }
 		
-	}
-}
-else{
+	}		
 	?>
-	<META http-equiv="refresh" content = "0;URL=scannewequipment.php">
-	<?php
-}
-
-?>
 <html>
 <body>
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])."?serialNumber=".$serialNumber;?>" method = "post" >
-	<label>Serial Number: </label>
-	<input type="text" name="serialNumber" value="<?php echo $serialNumber; ?>" readonly/><br/>
-	<label>Office Tag: </label>
-	<input type="text" name="officeTag" autofocus="autofocus" value="<?php echo $officeTag; ?>" required/><br/>
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" >
+	<label>Serial Number: </label><br/>
+	<input class="awesometextareas" type="text" name="serialNumber" value="<?php echo $serialNumber; ?>" autofocus/><br/>
+	<span id = "scan_error"><?php echo $serialNumber_err; ?></span><br/>
+	<label>Office Tag: </label><br/>
+	<input class="awesometextareas" type="text" name="officeTag" autofocus="autofocus" value="<?php echo $officeTag; ?>" required/><br/>
 	<span id = "scan_error"><?php echo $officeTag_err; ?></span><br/>
-	<label>Equipment Name: </label>
-	<input type="text" name="equipmentName" value="<?php echo $equipmentName; ?>" required/><br/>
+	<label>Equipment Name: </label><br/>
+	<input class="awesometextareas" type="text" name="equipmentName" value="<?php echo $equipmentName; ?>" required/><br/>
 	<span id = "scan_error"><?php echo $equipmentName_err; ?></span><br/>
-	<label>Brand: </label>
-	<input type="text" name="equipmentBrand" value="<?php echo $equipmentBrand; ?>" required/><br/>
+	<label>Brand: </label><br/>
+	<input class="awesometextareas" type="text" name="equipmentBrand" value="<?php echo $equipmentBrand; ?>" required/><br/>
 	<span id = "scan_error"><?php echo $equipmentBrand_err; ?></span><br/>
 
 <input  id="submitbtn" type="submit" name="submit"/>
